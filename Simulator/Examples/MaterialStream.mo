@@ -138,7 +138,7 @@ package MaterialStream "Examples of Simulating Material Stream using Different M
       end NRTL;
 
   model GraysonStreed "Material stream simulated with Grayson-Streed property package"
-  
+  //This example can be run using the homotopy non linear solver, the results differ from those obtained using the old frontend.
     import data = Simulator.Files.ChemsepDatabase;
     parameter data.Ethylene eth;
     parameter data.Acetylene acet;
@@ -148,7 +148,7 @@ package MaterialStream "Examples of Simulating Material Stream using Different M
     //Sp = Solublity Parameter
     //V = Molar Volume
     //All the above three parameters have to be mentioned as arguments while extending the thermodynamic Package Grayson Streed  as shown below
-    extends Simulator.Files.ThermodynamicPackages.GraysonStreed(W_c = {0.0949, 0.1841, 0.244612, 0.3125}, SP_c = {0.00297044, 0.00449341, 0.00437069, 0.00419199}, V_c = {61, 42.1382, 84.7207, 60.4292});
+    extends Simulator.Files.ThermodynamicPackages.GraysonStreed(Nc = 4, C = {eth, acet, dich, prop}, W_c = {0.0949, 0.1841, 0.244612, 0.3125}, SP_c = {0.00297044, 0.00449341, 0.00437069, 0.00419199}, V_c = {61, 42.1382, 84.7207, 60.4292});
     extends Simulator.Streams.MaterialStream(Nc = 4, C = {eth, acet, dich, prop});
     //Equations
   equation
