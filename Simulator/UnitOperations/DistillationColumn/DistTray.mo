@@ -24,7 +24,7 @@ within Simulator.UnitOperations.DistillationColumn;
     Real Hout(unit = "kJ/kmol",start=Htotg) "Side draw molar enthalpy";
     Real Hvapout_c[Nc](each unit = "kJ/kmol",each start=Hvapg) "Outlet components vapor molar enthalpy";
     Real Hliqout_c[Nc](each unit = "kJ/kmol",each start=Hliqg) "Outlet components liquid molar enthalpy";
-    Real x_pc[3, Nc](each min =0, each max = 0,start={xguess,xguess,xguess});
+    Real x_pc[3, Nc](each min =0, each max = 1,start={xguess,xguess,xguess});
     
     Real Pdew(unit = "Pa", min = 0, start = Pmax) "Dew pressure";
     Real Pbubl(unit = "Pa", min = 0, start = Pmin) "Bubble pressure";
