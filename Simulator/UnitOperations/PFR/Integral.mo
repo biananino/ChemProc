@@ -23,7 +23,7 @@ within Simulator.UnitOperations.PFR;
         Rate := 1;
         for i in 2:Nc loop
           if DO[Base_comp, 1] == 0 then
-//            Rate := Rate * product((Co[i] + Sc[i, 1] / Bc[1] * Co[Base_comp] * u) ^ DO[i, 1]);
+//            Rate := Rate * product((Co[i] + Sc[i, 1] / Bc[1] * Co[Base_comp] * u) ^ DO[i, 1]); Needs to be changed later when adding support for multiple reactions. 
             Rate := Rate * (Co[i] + Sc[i, 1] / Bc[1] * Co[Base_comp] * u) ^ DO[i, 1];
           else
 //            Rate := Rate * product((Co_dummy[i - 1] * (1 - X_dummy[i - 1])) ^ DO_dummy[i - 1, 1]);

@@ -24,7 +24,7 @@ within Simulator.UnitOperations.PFR;
     Dialog(tab = "Reactor Specifications", group = "Calculation Parameters"));
         parameter Real Pdel(unit = "Pa")  "Pressure Drop" annotation(
     Dialog(tab = "Reactor Specifications", group = "Calculation Parameters"));
-        Integer Base_C  "Base component";
+        parameter Integer Base_C = BC_r[1] "Base component";
   //=========================================================================
   //Model Variables
         Integer Phaseindex;
@@ -96,7 +96,6 @@ within Simulator.UnitOperations.PFR;
       extends GuessModels.InitialGuess;
      
       equation
-      X_r[Base_C] = 0.0991; //Workaround for bug. Lets model compile, but doesn't simulate correctly.
 //connector-Equations
     In.P = Pin;
     In.T = Tin;
@@ -116,7 +115,6 @@ within Simulator.UnitOperations.PFR;
     En.Q = Q;
 //Phase Equilibria
 //==========================================================================================================
-  Base_C = BC_r[1];
 for i in 1:Nc loop
    Pvapin_c[i] = Simulator.Files.ThermodynamicFunctions.Psat(C[i].VP, Tin);
    Pvapout_c[i] = Simulator.Files.ThermodynamicFunctions.Psat(C[i].VP, Tout);
