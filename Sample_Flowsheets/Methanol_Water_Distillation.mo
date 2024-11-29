@@ -23,11 +23,11 @@ package rigDist
 
   model DistColumn
     
-    extends Simulator.UnitOperations.DistillationColumn.DistCol;
-    Condenser condenser(Nc = Nc, C = C, Ctype = Ctype, Bin = Bin_t[1]);
-    Reboiler reboiler(Nc = Nc, C = C, Bin = Bin_t[Nt]);
-    Tray tray[Nt - 2](each Nc = Nc, each C = C, Bin = Bin_t[2:Nt - 1]);
-      
+    extends Simulator.UnitOperations.DistillationColumn.DistCol(
+    redeclare Condenser condenser(Nc = Nc, C = C, Ctype = Ctype, Bin = Bin_t[1]),
+    redeclare Reboiler reboiler(Nc = Nc, C = C, Bin = Bin_t[Nt]),
+    redeclare Tray tray[Nt - 2](each Nc = Nc, each C = C, Bin = Bin_t[2:Nt - 1]));
+     
   end DistColumn;
 
 end rigDist;

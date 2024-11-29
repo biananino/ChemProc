@@ -28,10 +28,10 @@ package rigDist
 
   model DistColumn
     
-    extends Simulator.UnitOperations.DistillationColumn.DistCol;
-    Condenser condenser(Nc = Nc, C = C, Ctype = Ctype, Bin = Bin_t[1]);
-    Reboiler reboiler(Nc = Nc, C = C, Bin = Bin_t[Nt]);
-    Tray tray[Nt - 2](each Nc = Nc, each C = C, Bin = Bin_t[2:Nt - 1]);
+    extends Simulator.UnitOperations.DistillationColumn.DistCol(
+    redeclare Condenser condenser(Nc = Nc, C = C, Ctype = Ctype, Bin = Bin_t[1]),
+    redeclare Reboiler reboiler(Nc = Nc, C = C, Bin = Bin_t[Nt]),
+    redeclare Tray tray[Nt - 2](each Nc = Nc, each C = C, Bin = Bin_t[2:Nt - 1]));
       
   end DistColumn;
 
@@ -106,11 +106,11 @@ end rigDist;
       Line(points = {{48, 50}, {70, 50}, {70, 50}, {70, 50}}, color = {0, 70, 70}));
     connect(S_03.Out, REACT_01.In) annotation(
       Line(points = {{2, 50}, {28, 50}, {28, 50}, {28, 50}, {28, 50}}, color = {0, 70, 70}));
-    connect(MIX_01.outlet, S_03.In) annotation(
+    connect(MIX_01.Out, S_03.In) annotation(
       Line(points = {{-38, 48}, {-18, 48}, {-18, 50}, {-18, 50}}, color = {0, 70, 70}));
-    connect(S_02.Out, MIX_01.inlet[2]) annotation(
+    connect(S_02.Out, MIX_01.In[2]) annotation(
       Line(points = {{-76, 40}, {-64, 40}, {-64, 48}, {-58, 48}, {-58, 48}}, color = {0, 70, 70}));
-    connect(S_01.Out, MIX_01.inlet[1]) annotation(
+    connect(S_01.Out, MIX_01.In[1]) annotation(
       Line(points = {{-74, 66}, {-64, 66}, {-64, 48}, {-58, 48}, {-58, 48}}, color = {0, 70, 70}));
   
     S_01.T = 347.602;
