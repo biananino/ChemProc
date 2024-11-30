@@ -25,7 +25,7 @@ package Benzene_Toluene_Distillation
         Placement(visible = true, transformation(origin = {-110, 36}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
       Benzene_Toluene_Distillation.Material_Streams Preheated_Feed(Nc = Nc, C = C, T(start = 353), x_pc(each start = 0.333), P(start = 101325)) annotation(
         Placement(visible = true, transformation(origin = {-22, 36}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
-      Benzene_Toluene_Distillation.rigDist.DistColumn DC(Nc = Nc, C = C, Nt = 24, InT_s = {11}, each tray.Fliq_s(each start = 100), each tray.Fvap_s(each start = 150), each tray.T(start = 366)) annotation(
+      Benzene_Toluene_Distillation.rigDist.DistColumn DC(Nc = Nc, C = C, Nt = 24, InT_s = {11}, each tray.Fliq_s(each start = 15000), each tray.Fvap_s(each start = 15000), each tray.T(start = 366)) annotation(
         Placement(visible = true, transformation(origin = {20, 36}, extent = {{-24, -24}, {24, 24}}, rotation = 0)));
       Benzene_Toluene_Distillation.Material_Streams Distillate(Nc = Nc, C = C) annotation(
         Placement(visible = true, transformation(origin = {56, 54}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
