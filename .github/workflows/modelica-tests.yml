@@ -1,0 +1,44 @@
+name: Modelica Tests
+on:
+  push:
+    branches:
+      - 'testing/add-modelica-tests'
+      - 'main'
+  pull_request:
+    branches:
+      - 'main'
+  workflow_dispatch:
+
+jobs:
+  library-testing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Setup OpenModelica
+        uses: OpenModelica/setup-openmodelica@v1
+        with:
+          version: stable
+          packages: |
+            omc
+          libraries: |
+            Modelica 4.0.0
+          omc-diff: true
+
+      - name: openmodelica-library-testing
+        uses: OpenModelica/openmodelica-library-testing-action@v0.2.0
+        with:
+          library: 'Simulator'
+          library-version: '0.9.0'
+          modelica-file: 'Simulator/package.mo'
+          omc-version: 'stable'
+          reference-files-dir: 'ReferenceFiles'
+          reference-files-extension: 'mat'
+          reference-files-delimiter: '.'
