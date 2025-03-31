@@ -79,7 +79,9 @@ package NRTL
     for i in 1:41 loop
       x[i, 1] = 0 + (i - 1) * 0.025;
     end for;
-  end Txy;
+  annotation(
+      experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.002));
+end Txy;
 
   model Pxy
     extends Modelica.Icons.Example;
@@ -98,5 +100,7 @@ package NRTL
     for i in 1:41 loop
       x[i, 1] = 0 + (i - 1) * 0.025;
     end for;
-  end Pxy;
+  annotation(
+      experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.002));
+end Pxy;
 end NRTL;

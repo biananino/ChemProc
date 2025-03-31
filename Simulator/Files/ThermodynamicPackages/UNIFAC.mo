@@ -193,7 +193,6 @@ within Simulator.Files.ThermodynamicPackages;
   </p>https://wikimedia.org/api/rest_v1/media/math/render/svg/b6eb40a653fe590b5bfa137fe76342eef6a502d2
   </p>
   </tr>
-  </html>"),
-      experiment(StopTime = 1.0, Interval = 0.001));
+  </html>"));
   end UNIFAC;
 

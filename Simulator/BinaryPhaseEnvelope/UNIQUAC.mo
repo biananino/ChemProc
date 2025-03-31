@@ -161,7 +161,9 @@ package UNIQUAC
       y1[i] = K1[i] * z1[i];
       y2[i] = 1 - y1[i];
     end for;
-  end Pxy;
+  annotation(
+      experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.002));
+end Pxy;
 
   //=====================================================================================================
 
@@ -250,7 +252,9 @@ package UNIQUAC
     for i in 1:N + 1 loop
       Psat[i, 1] = Simulator.Files.ThermodynamicFunctions.Psat(comp[1].VP, T[i]);
     end for;
-  end Txy;
+  annotation(
+      experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.002));
+end Txy;
 
   //================================================================================================
   //==============================================================================================================
