@@ -1,34 +1,34 @@
 package DiethylEther_from_Ethanol
 
 model ms
-  extends Simulator.Streams.MaterialStream;
-  extends Simulator.Files.ThermodynamicPackages.RaoultsLaw;
+  extends ChemProc.Streams.MaterialStream;
+  extends ChemProc.Files.ThermodynamicPackages.RaoultsLaw;
 end ms;
 
 model CR
-  extends Simulator.UnitOperations.ConversionReactor;
-  extends Simulator.Files.Models.ReactionManager.ConversionReaction;
+  extends ChemProc.UnitOperations.ConversionReactor;
+  extends ChemProc.Files.Models.ReactionManager.ConversionReaction;
 end CR;
 
 package rigDist
   model Condenser
-    extends Simulator.UnitOperations.DistillationColumn.Cond;
-    extends Simulator.Files.ThermodynamicPackages.RaoultsLaw;
+    extends ChemProc.UnitOperations.DistillationColumn.Cond;
+    extends ChemProc.Files.ThermodynamicPackages.RaoultsLaw;
   end Condenser;
 
   model Tray
-    extends Simulator.UnitOperations.DistillationColumn.DistTray;
-    extends Simulator.Files.ThermodynamicPackages.RaoultsLaw;
+    extends ChemProc.UnitOperations.DistillationColumn.DistTray;
+    extends ChemProc.Files.ThermodynamicPackages.RaoultsLaw;
   end Tray;
 
   model Reboiler
-    extends Simulator.UnitOperations.DistillationColumn.Reb;
-    extends Simulator.Files.ThermodynamicPackages.RaoultsLaw;
+    extends ChemProc.UnitOperations.DistillationColumn.Reb;
+    extends ChemProc.Files.ThermodynamicPackages.RaoultsLaw;
   end Reboiler;
 
   model DistColumn
     
-    extends Simulator.UnitOperations.DistillationColumn.DistCol;
+    extends ChemProc.UnitOperations.DistillationColumn.DistCol;
     Condenser condenser(Nc = Nc, C = C, Ctype = Ctype, Bin = Bin_t[1]);
     Reboiler reboiler(Nc = Nc, C = C, Bin = Bin_t[Nt]);
     Tray tray[Nt - 2](each Nc = Nc, each C = C, Bin = Bin_t[2:Nt - 1]);
@@ -39,13 +39,13 @@ end rigDist;
 
   model Flowsheet
   
-    import data = Simulator.Files.ChemsepDatabase;
+    import data = ChemProc.Files.ChemsepDatabase;
     parameter data.Diethylether dieth;
     parameter data.Ethanol eth;
     parameter data.Water wat;
     parameter Integer Nc = 3;
     parameter data.GeneralProperties C[Nc] = {dieth, eth, wat};
-  Simulator.UnitOperations.Mixer MIX_01(C = C, NI = 2, Nc = Nc, outPress = "Inlet_Average")  annotation(
+  ChemProc.UnitOperations.Mixer MIX_01(C = C, NI = 2, Nc = Nc, outPress = "Inlet_Average")  annotation(
       Placement(visible = true, transformation(origin = {-48, 48}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   DiethylEther_from_Ethanol.CR REACT_01(BC_r = {2}, C = C, CalcMode = "Define_Out_Temperature", Coef_cr = {{1}, {-2}, {1}}, Nc = Nc, Nr = 1, Tdef = 298.15, X_r = {0.5})  annotation(
       Placement(visible = true, transformation(origin = {38, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -69,15 +69,15 @@ end rigDist;
       Placement(visible = true, transformation(origin = {-106, -8}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   DiethylEther_from_Ethanol.ms S_08(C = C, Nc = Nc)  annotation(
       Placement(visible = true, transformation(origin = {-106, -66}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
-  Simulator.Streams.EnergyStream E_01 annotation(
+  ChemProc.Streams.EnergyStream E_01 annotation(
       Placement(visible = true, transformation(origin = {20, 8}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
-  Simulator.Streams.EnergyStream E_02 annotation(
+  ChemProc.Streams.EnergyStream E_02 annotation(
       Placement(visible = true, transformation(origin = {18, -98}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Simulator.Streams.EnergyStream E_03 annotation(
+  ChemProc.Streams.EnergyStream E_03 annotation(
       Placement(visible = true, transformation(origin = {10, 28}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Simulator.Streams.EnergyStream E_04 annotation(
+  ChemProc.Streams.EnergyStream E_04 annotation(
       Placement(visible = true, transformation(origin = {-92, 22}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
-  Simulator.Streams.EnergyStream E_05 annotation(
+  ChemProc.Streams.EnergyStream E_05 annotation(
       Placement(visible = true, transformation(origin = {-106, -98}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
     connect(S_06.Out, DC_02.In_s[1]) annotation(
