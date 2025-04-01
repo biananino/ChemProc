@@ -1,9 +1,9 @@
 within ChemProc.Files.ThermodynamicPackages;
 
   model RaoultsLaw
-    import Simulator.Files.ThermodynamicFunctions.*;
+    import ChemProc.Files.ThermodynamicFunctions.*;
     parameter Integer Nc "Number of components";
-    parameter Simulator.Files.ChemsepDatabase.GeneralProperties C[Nc];
+    parameter ChemProc.Files.ChemsepDatabase.GeneralProperties C[Nc];
     Real K_c[Nc](each min = 0), Cpres_p[3], Hres_p[3], Sres_p[3];
     Real gma_c[Nc], gmabubl_c[Nc], gmadew_c[Nc];
     Real philiqbubl_c[Nc], phivapdew_c[Nc], Pvap_c[Nc];
@@ -18,7 +18,7 @@ within ChemProc.Files.ThermodynamicPackages;
       phivapdew_c[i] = 1;
     end for;
     for i in 1:Nc loop
-      Pvap_c[i] = Simulator.Files.ThermodynamicFunctions.Psat(C[i].VP, T);
+      Pvap_c[i] = ChemProc.Files.ThermodynamicFunctions.Psat(C[i].VP, T);
     end for;
     for j in 1:Nc loop
       K_c[j] = Pvap_c[j] / P;

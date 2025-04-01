@@ -2,7 +2,7 @@ within ChemProc.Files.ThermodynamicFunctions;
 
 function PoyntingCF "Function to compute the Poynting Correction Factor"
   extends Modelica.Icons.Function;
-  import Simulator.Files.ThermodynamicFunctions.*;
+  import ChemProc.Files.ThermodynamicFunctions.*;
   input Integer Nc;
   input Real Pc, Tc, RP, AF, MW;
   input Real T, P;

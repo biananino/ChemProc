@@ -33,10 +33,10 @@ package PR
   end CompresseblityFactor;
 
   model PR
-    parameter Simulator.Files.ChemsepDatabase.GeneralProperties C[Nc];
+    parameter ChemProc.Files.ChemsepDatabase.GeneralProperties C[Nc];
     parameter Integer Nc;
     parameter Real R = 8.314;
-    parameter Real kij[Nc, Nc] = Simulator.Files.ThermodynamicFunctions.BIPPR(Nc, C.name);
+    parameter Real kij[Nc, Nc] = ChemProc.Files.ThermodynamicFunctions.BIPPR(Nc, C.name);
     Real x[Nc];
     Real y[Nc];
     Real Tr[Nc];
@@ -72,8 +72,8 @@ package PR
     Real Tbubl(start = 273);
   equation
     for i in 1:Nc loop
-      Psat_bubl[i] = Simulator.Files.ThermodynamicFunctions.Psat(C[i].VP, Tbubl);
-      Psat[i] = Simulator.Files.ThermodynamicFunctions.Psat(C[i].VP, T);
+      Psat_bubl[i] = ChemProc.Files.ThermodynamicFunctions.Psat(C[i].VP, Tbubl);
+      Psat[i] = ChemProc.Files.ThermodynamicFunctions.Psat(C[i].VP, T);
     end for;
   //Bubble Point and Dew Point Calculation Routine
     Tr_bubl = Tbubl ./ C.Tc;
@@ -105,7 +105,7 @@ package PR
   end PR;
 
   model PhaseEquilibria
-    import data = Simulator.Files.ChemsepDatabase;
+    import data = ChemProc.Files.ChemsepDatabase;
     parameter data.Ethane eth;
     parameter data.Propane prop;
     extends PR(Nc = 2, C = {eth, prop});
@@ -119,7 +119,7 @@ package PR
 
   model Pxy
     extends Modelica.Icons.Example;
-    import data = Simulator.Files.ChemsepDatabase;
+    import data = ChemProc.Files.ChemsepDatabase;
     parameter data.Ethane eth;
     parameter data.Propane prop;
     parameter Integer Nc = 2;
@@ -147,7 +147,7 @@ package PR
 
   model Txy
     extends Modelica.Icons.Example;
-    import data = Simulator.Files.ChemsepDatabase;
+    import data = ChemProc.Files.ChemsepDatabase;
     parameter data.Ethane eth;
     parameter data.Propane prop;
     parameter Integer Nc = 2;

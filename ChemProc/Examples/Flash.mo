@@ -4,37 +4,37 @@ package Flash "Example of Simulating a Flash Separator"
   extends Modelica.Icons.ExamplesPackage;
 
   model MS "Extension of Material Stream with Raoult's Law"
-    extends Simulator.Streams.MaterialStream;
-    extends Simulator.Files.ThermodynamicPackages.RaoultsLaw;
+    extends ChemProc.Streams.MaterialStream;
+    extends ChemProc.Files.ThermodynamicPackages.RaoultsLaw;
     annotation(
-      Documentation(info = "<html><head></head><body><span style=\"font-size: 12px;\">This is a non-executable model is created inside the package Flash to extend the&nbsp;</span><a href=\"modelica://Simulator.Streams.MaterialStream\">MaterialStream</a><span style=\"font-size: 12px;\">&nbsp;model along with the necessary property method from&nbsp;</span>ThermodynamicPackages<span style=\"font-size: 12px;\">&nbsp;which is&nbsp;</span><a href=\"modelica://Simulator.Files.ThermodynamicPackages.RaoultsLaw\">RaoultsLaw</a><span style=\"font-size: 12px;\">&nbsp;in this case.</span><div><span style=\"font-size: 12px;\"><br></span></div><div><span style=\"font-size: 12px;\">It will be instantiated in the&nbsp;</span><a href=\"modelica://Simulator.Examples.Flash.FlashSimulation\" style=\"font-size: 12px;\">FlashSimulation</a><span style=\"font-size: 12px;\">&nbsp;model to create the required number of instances of the material stream model.</span></div></body></html>"));
+      Documentation(info = "<html><head></head><body><span style=\"font-size: 12px;\">This is a non-executable model is created inside the package Flash to extend the&nbsp;</span><a href=\"modelica://ChemProc.Streams.MaterialStream\">MaterialStream</a><span style=\"font-size: 12px;\">&nbsp;model along with the necessary property method from&nbsp;</span>ThermodynamicPackages<span style=\"font-size: 12px;\">&nbsp;which is&nbsp;</span><a href=\"modelica://ChemProc.Files.ThermodynamicPackages.RaoultsLaw\">RaoultsLaw</a><span style=\"font-size: 12px;\">&nbsp;in this case.</span><div><span style=\"font-size: 12px;\"><br></span></div><div><span style=\"font-size: 12px;\">It will be instantiated in the&nbsp;</span><a href=\"modelica://ChemProc.Examples.Flash.FlashSimulation\" style=\"font-size: 12px;\">FlashSimulation</a><span style=\"font-size: 12px;\">&nbsp;model to create the required number of instances of the material stream model.</span></div></body></html>"));
   end MS;
 
   model FlashSep "Extension of Flash Separator with Raoult's Law"
-    extends Simulator.UnitOperations.Flash;
-    extends Simulator.Files.ThermodynamicPackages.RaoultsLaw;
+    extends ChemProc.UnitOperations.Flash;
+    extends ChemProc.Files.ThermodynamicPackages.RaoultsLaw;
     annotation(
-      Documentation(info = "<html><head></head><body><span style=\"font-size: 12px;\">This is a non-executable model is created inside the package Flash to extend the&nbsp;</span><a href=\"modelica://Simulator.UnitOperations.Flash\">FlashColumn</a><span style=\"font-size: 12px;\">&nbsp;model along with the necessary property method from&nbsp;</span>ThermodynamicPackages<span style=\"font-size: 12px;\">&nbsp;which is&nbsp;</span><a href=\"modelica://Simulator.Files.ThermodynamicPackages.RaoultsLaw\">RaoultsLaw</a><span style=\"font-size: 12px;\">&nbsp;in this case.</span><div><span style=\"font-size: 12px;\"><br></span></div><div><span style=\"font-size: 12px;\">It will be instantiated in the&nbsp;</span><a href=\"modelica://Simulator.Examples.Flash.FlashSimulation\" style=\"font-size: 12px;\">FlashSimulation</a><span style=\"font-size: 12px;\">&nbsp;model to create the required instance of the flash column model.</span></div></body></html>"));
+      Documentation(info = "<html><head></head><body><span style=\"font-size: 12px;\">This is a non-executable model is created inside the package Flash to extend the&nbsp;</span><a href=\"modelica://ChemProc.UnitOperations.Flash\">FlashColumn</a><span style=\"font-size: 12px;\">&nbsp;model along with the necessary property method from&nbsp;</span>ThermodynamicPackages<span style=\"font-size: 12px;\">&nbsp;which is&nbsp;</span><a href=\"modelica://ChemProc.Files.ThermodynamicPackages.RaoultsLaw\">RaoultsLaw</a><span style=\"font-size: 12px;\">&nbsp;in this case.</span><div><span style=\"font-size: 12px;\"><br></span></div><div><span style=\"font-size: 12px;\">It will be instantiated in the&nbsp;</span><a href=\"modelica://ChemProc.Examples.Flash.FlashSimulation\" style=\"font-size: 12px;\">FlashSimulation</a><span style=\"font-size: 12px;\">&nbsp;model to create the required instance of the flash column model.</span></div></body></html>"));
   end FlashSep;
 
   model FlashSimulation "Flash out a two component system into gas and liquid streams at given T & P conditions"
     extends Modelica.Icons.Example;
     //=====================================================================
     //Header Files and Parameters
-    import data = Simulator.Files.ChemsepDatabase;
+    import data = ChemProc.Files.ChemsepDatabase;
     parameter data.Benzene benz;
     parameter data.Toluene tol;
     parameter Integer Nc = 2;
     parameter data.GeneralProperties C[Nc] = {benz, tol};
     //=====================================================================
     //Instantiation of Streams and Blocks
-    Simulator.Examples.Flash.MS S1(Nc = Nc, C = C) annotation(
+    ChemProc.Examples.Flash.MS S1(Nc = Nc, C = C) annotation(
       Placement(visible = true, transformation(origin = {-76, 4}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Examples.Flash.MS S2(Nc = Nc, C = C) annotation(
+    ChemProc.Examples.Flash.MS S2(Nc = Nc, C = C) annotation(
       Placement(visible = true, transformation(origin = {56, -16}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Examples.Flash.MS S3(Nc = Nc, C = C) annotation(
+    ChemProc.Examples.Flash.MS S3(Nc = Nc, C = C) annotation(
       Placement(visible = true, transformation(origin = {54, 28}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Examples.Flash.FlashSep B1(Nc = Nc, C = C) annotation(
+    ChemProc.Examples.Flash.FlashSep B1(Nc = Nc, C = C) annotation(
       Placement(visible = true, transformation(origin = {-14, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
 //=====================================================================
@@ -55,6 +55,6 @@ package Flash "Example of Simulating a Flash Separator"
       Documentation(info = "<html><head></head><body><span style=\"font-size: 12px;\">This is an executable model to simualate the Flash example where all the components are defined, material stream &amp; flash column specifications are declared, model instances are connected.</span><div style=\"font-size: 12px;\"><br></div><div style=\"font-size: 12px;\"><div><b>Material Stream Information</b></div><div><br></div><div><div><b>Molar Flow Rate:</b>&nbsp;100 mol/s</div><div><b>Mole Fraction (Benzene):</b>&nbsp;0.5</div><div><b>Mole Fraction (Toluene):</b>&nbsp;0.5</div><div><b>Pressure:</b>&nbsp;101325 Pa</div><div><b>Temperature:</b>&nbsp;368 K</div><div><br></div><b>Flash Column Specifications:</b>&nbsp;Flash Operated at feed temperature and pressure</div></div></body></html>"));
   end FlashSimulation;
   annotation(
-    Documentation(info = "<html><head></head><body><div style=\"font-size: 12px;\">Following problem statement is simulated in this&nbsp;<b>Flash Column</b>&nbsp;example</div><div style=\"font-size: 12px;\"><b><br></b></div><b style=\"font-size: 12px;\">Component System:</b><span style=\"font-size: 12px;\">&nbsp;Benzene, Toluene</span><div style=\"font-size: 12px;\"><b>Thermodynamics:</b>&nbsp;Raoult's Law</div><div style=\"font-size: 12px;\"><br></div><div style=\"font-size: 12px;\"><b><u>Material Stream Information</u></b></div><div style=\"font-size: 12px;\"><br></div><div style=\"font-size: 12px;\"><b>Molar Flow Rate:</b>&nbsp;100 mol/s</div><div style=\"font-size: 12px;\"><b>Mole Fraction (Benzene):</b>&nbsp;0.5</div><div style=\"font-size: 12px;\"><b>Mole Fraction (Toluene):</b>&nbsp;0.5</div><div style=\"font-size: 12px;\"><b>Pressure:</b>&nbsp;101325 Pa</div><div style=\"font-size: 12px;\"><b>Temperature:</b>&nbsp;368 K</div><div style=\"font-size: 12px;\"><br></div><span style=\"font-size: 12px;\">Simulate a flash column operating at the feed temperature and pressure.</span><hr><div><span style=\"font-size: 12px;\"><br></span></div><div><span style=\"font-size: 12px;\">This package is created to demnostrate the simualtion of a Flash Column. Following models are created inside the package:</span></div><div><div style=\"font-size: 12px;\"><ol><li><a href=\"modelica://Simulator.Examples.Flash.MS\">MS</a>&nbsp;(Non-executable model):&nbsp;created to extend the material stream along with the necessary thermodynamic package.</li>
-<li><a href=\"modelica://Simulator.Examples.Flash.FlashSep\">FlashSep</a>&nbsp;(Non-executable model):&nbsp;created to extend the flash column along with the necessary thermodynamic package.</li><li><a href=\"modelica://Simulator.Examples.Flash.FlashSimulation\">FlashSimulation</a>&nbsp;(Executable model): All the components are defined, material stream &amp; flash column specifications are declared, model instances are connected to make the file executable.</li></ol></div></div></body></html>"));
+    Documentation(info = "<html><head></head><body><div style=\"font-size: 12px;\">Following problem statement is simulated in this&nbsp;<b>Flash Column</b>&nbsp;example</div><div style=\"font-size: 12px;\"><b><br></b></div><b style=\"font-size: 12px;\">Component System:</b><span style=\"font-size: 12px;\">&nbsp;Benzene, Toluene</span><div style=\"font-size: 12px;\"><b>Thermodynamics:</b>&nbsp;Raoult's Law</div><div style=\"font-size: 12px;\"><br></div><div style=\"font-size: 12px;\"><b><u>Material Stream Information</u></b></div><div style=\"font-size: 12px;\"><br></div><div style=\"font-size: 12px;\"><b>Molar Flow Rate:</b>&nbsp;100 mol/s</div><div style=\"font-size: 12px;\"><b>Mole Fraction (Benzene):</b>&nbsp;0.5</div><div style=\"font-size: 12px;\"><b>Mole Fraction (Toluene):</b>&nbsp;0.5</div><div style=\"font-size: 12px;\"><b>Pressure:</b>&nbsp;101325 Pa</div><div style=\"font-size: 12px;\"><b>Temperature:</b>&nbsp;368 K</div><div style=\"font-size: 12px;\"><br></div><span style=\"font-size: 12px;\">Simulate a flash column operating at the feed temperature and pressure.</span><hr><div><span style=\"font-size: 12px;\"><br></span></div><div><span style=\"font-size: 12px;\">This package is created to demnostrate the simualtion of a Flash Column. Following models are created inside the package:</span></div><div><div style=\"font-size: 12px;\"><ol><li><a href=\"modelica://ChemProc.Examples.Flash.MS\">MS</a>&nbsp;(Non-executable model):&nbsp;created to extend the material stream along with the necessary thermodynamic package.</li>
+<li><a href=\"modelica://ChemProc.Examples.Flash.FlashSep\">FlashSep</a>&nbsp;(Non-executable model):&nbsp;created to extend the flash column along with the necessary thermodynamic package.</li><li><a href=\"modelica://ChemProc.Examples.Flash.FlashSimulation\">FlashSimulation</a>&nbsp;(Executable model): All the components are defined, material stream &amp; flash column specifications are declared, model instances are connected to make the file executable.</li></ol></div></div></body></html>"));
 end Flash;

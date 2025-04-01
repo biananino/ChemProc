@@ -5,7 +5,7 @@ model InitialGuess
    //Inputs Required to generate Guess Values
       extends GuessInput;
       parameter Integer Nc "Number of components";
-      parameter Simulator.Files.ChemsepDatabase.GeneralProperties C[Nc];
+      parameter ChemProc.Files.ChemsepDatabase.GeneralProperties C[Nc];
       //==========================================================================================
       //Guess variables for Pressures and Temperatures
       protected
@@ -54,15 +54,15 @@ model InitialGuess
 //Generation of Bubble Temperature for DC guess-(Temperatures)
       Pg = sum(xguess[:] .* Psatbg[:]);
       for i in 1:Nc loop
-        Psatbg[i] = Simulator.Files.ThermodynamicFunctions.Psat(C[i].VP, Tbg);
-        Psatdg[i] = Simulator.Files.ThermodynamicFunctions.Psat(C[i].VP, Tdg);
+        Psatbg[i] = ChemProc.Files.ThermodynamicFunctions.Psat(C[i].VP, Tbg);
+        Psatdg[i] = ChemProc.Files.ThermodynamicFunctions.Psat(C[i].VP, Tdg);
       end for;
       Fg = Fliqg + Fvapg;
       xguess[1] * Fg = xg[1] * Fliqg + yg[1] * Fvapg;
 //============================================================================
       Tc = C.Tc;
       for i in 1:Nc loop
-        Psatt[i] = Simulator.Files.ThermodynamicFunctions.Psat(C[i].VP, Temp);
+        Psatt[i] = ChemProc.Files.ThermodynamicFunctions.Psat(C[i].VP, Temp);
         K_guess[i] = Psatt[i] / Pg;
       end for;
       xliqg = 1 - xvapg;
@@ -135,8 +135,8 @@ model InitialGuess
       Htotg = Hmixg;
       for i in 1:Nc loop
         Hcompg[i] = xguess[i] * Htotg;
-        Hcomplg[i] = Simulator.Files.ThermodynamicFunctions.HLiqId(C[i].SH, C[i].VapCp, C[i].HOV, C[i].Tc, Temp);
-        Hcompvg[i] = Simulator.Files.ThermodynamicFunctions.HVapId(C[i].SH, C[i].VapCp, C[i].HOV, C[i].Tc, Temp);
+        Hcomplg[i] = ChemProc.Files.ThermodynamicFunctions.HLiqId(C[i].SH, C[i].VapCp, C[i].HOV, C[i].Tc, Temp);
+        Hcompvg[i] = ChemProc.Files.ThermodynamicFunctions.HVapId(C[i].SH, C[i].VapCp, C[i].HOV, C[i].Tc, Temp);
       end for;
       Htotg = Hliqg + Hvapg;
       Hliqg = sum(xguess .* Hcomplg);

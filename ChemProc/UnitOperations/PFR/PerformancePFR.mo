@@ -20,5 +20,5 @@ within ChemProc.UnitOperations.PFR;
       algorithm
         V := Modelica.Math.Nonlinear.quadratureLobatto(function Integral(Nc = Nc, Nr = Nr, Order = Order, Base_comp = Base_comp, Co_dummy = Co_dummy, DO_dummy = DO_dummy, X_dummy = X_dummy, DO = DO, Co = C, Sc = Sc, Bc = Bc, Fao = F, k = k, X = X), 0, X);
       annotation(
-    Documentation(info = "<html><head></head><body>This function using an adaptive Lobattor rule calls the <a href = \"modelica://Modelica.Math.Nonlinear.quadratureLobatto\">QuadratureLobatto</a> function and return the integral of the <a href = \"modelica://Simulator.UnitOperations.PFR.Integral\">Integral</a> function used in performace equation of a PFR</body></html>"));
+    Documentation(info = "<html><head></head><body>This function using an adaptive Lobattor rule calls the <a href = \"modelica://Modelica.Math.Nonlinear.quadratureLobatto\">QuadratureLobatto</a> function and return the integral of the <a href = \"modelica://ChemProc.UnitOperations.PFR.Integral\">Integral</a> function used in performace equation of a PFR</body></html>"));
     end PerformancePFR;

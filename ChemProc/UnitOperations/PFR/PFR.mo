@@ -3,10 +3,10 @@ within ChemProc.UnitOperations.PFR;
  model PFR "Model of a Plug Flow Reactor to calculate the outlet stream mole fraction of components while describing chemical reactions in continuous, flowing systems of cylindrical geometry"          
 //=========================================================================
   //Header Files and Parameters
-        extends Simulator.Files.Icons.PFR;
-        import Simulator.Files.*;
-        import Simulator.Files.ThermodynamicFunctions.*; 
-        parameter Simulator.Files.ChemsepDatabase.GeneralProperties C[Nc] "Component instances array" annotation(
+        extends ChemProc.Files.Icons.PFR;
+        import ChemProc.Files.*;
+        import ChemProc.Files.ThermodynamicFunctions.*; 
+        parameter ChemProc.Files.ChemsepDatabase.GeneralProperties C[Nc] "Component instances array" annotation(
     Dialog(tab = "Reactor Specifications", group = "Component Parameters"));
         parameter Integer Nc "Number of components" annotation(
     Dialog(tab = "Reactor Specifications", group = "Component Parameters"));
@@ -78,7 +78,7 @@ within ChemProc.UnitOperations.PFR;
         Real Pvapin_c[Nc];
         Real Pvapout_c[Nc];
    
-       extends Simulator.Files.Models.ReactionManager.KineticReaction( Nr = 1,BC_r = {1}, Coef_cr = {{-1}, {-1}, {1}}, DO_cr = {{1}, {0}, {0}}, Af_r = {0.005}, Ef_r = {0});
+       extends ChemProc.Files.Models.ReactionManager.KineticReaction( Nr = 1,BC_r = {1}, Coef_cr = {{-1}, {-1}, {1}}, DO_cr = {{1}, {0}, {0}}, Af_r = {0.005}, Ef_r = {0});
         //===========================================================================================================
   //Instantiation of Connectors
     Real Q "The total energy given out/taken in due to the reactions";
@@ -86,11 +86,11 @@ within ChemProc.UnitOperations.PFR;
     Real Co_dummy[Nc-1];
     Real DO_dummy[Nc-1,Nr];
         
-      Simulator.Files.Interfaces.enConn En annotation(
+      ChemProc.Files.Interfaces.enConn En annotation(
           Placement(visible = true, transformation(origin = {0, -98}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Simulator.Files.Interfaces.matConn In(Nc = Nc) annotation(
+      ChemProc.Files.Interfaces.matConn In(Nc = Nc) annotation(
       Placement(visible = true, transformation(origin = {-348, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-348, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Simulator.Files.Interfaces.matConn Out(Nc = Nc) annotation(
+      ChemProc.Files.Interfaces.matConn Out(Nc = Nc) annotation(
       Placement(visible = true, transformation(origin = {350, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {350, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
  //============================================================================================================
       extends GuessModels.InitialGuess;
@@ -116,8 +116,8 @@ within ChemProc.UnitOperations.PFR;
 //Phase Equilibria
 //==========================================================================================================
 for i in 1:Nc loop
-   Pvapin_c[i] = Simulator.Files.ThermodynamicFunctions.Psat(C[i].VP, Tin);
-   Pvapout_c[i] = Simulator.Files.ThermodynamicFunctions.Psat(C[i].VP, Tout);
+   Pvapin_c[i] = ChemProc.Files.ThermodynamicFunctions.Psat(C[i].VP, Tin);
+   Pvapout_c[i] = ChemProc.Files.ThermodynamicFunctions.Psat(C[i].VP, Tout);
  end for;  
  
  if(Phase=="Mixture") then
@@ -324,7 +324,7 @@ for i in 1:Nc loop
   n = sum(DO_cr[:]);
 //Calculation of Rate Cin_cnstants
   for i in 1:Nr loop
-    k_r[i] = Simulator.Files.Models.ReactionManager.Arhenious(Nr, Af_r[i], Ef_r[i], Tin);
+    k_r[i] = ChemProc.Files.Models.ReactionManager.Arhenious(Nr, Af_r[i], Ef_r[i], Tin);
   end for;
 //Material Balance
 //Initial Number of Moles
@@ -339,7 +339,7 @@ for i in 1:Nc loop
   end for;
 //Calculation of V with respect to Cin_cnversion of limiting reeactant
 //    V = PerformancePFR(n, Cin_c[Base_C], Fin_c[Base_C], k_r[1], X_r[Base_C]);
-  V = Simulator.UnitOperations.PFR.PerformancePFR(Nc, Nr, n, Base_C, Co_dummy, DO_dummy, X_dummy, DO_cr, Cin_c, Coef_cr, BC_r, Fin_c[Base_C], k_r[1], X_r[Base_C]);
+  V = ChemProc.UnitOperations.PFR.PerformancePFR(Nc, Nr, n, Base_C, Co_dummy, DO_dummy, X_dummy, DO_cr, Cin_c, Coef_cr, BC_r, Fin_c[Base_C], k_r[1], X_r[Base_C]);
  
   tr = V / Fv_p[1];
 //============================================================================================================
@@ -423,5 +423,5 @@ for i in 1:Nc loop
   annotation(Icon(coordinateSystem(extent = {{-350, -100}, {350, 100}})),
       Diagram(coordinateSystem(extent = {{-350, -100}, {350, 100}})),
       __OpenModelica_Cin_cmmandLineOptions = "",
- Documentation(info = "<html><head></head><body><div style=\"font-size: 12px;\">The&nbsp;<b>Plug Flow Reactor (PFR)</b>&nbsp;is used to calculate the mole fraction of components at outlet stream when the reaction kinetics is defined.</div><div style=\"font-size: 12px;\"><br></div><div style=\"font-size: 12px;\"><div><span style=\"font-family: Arial, Helvetica, sans-serif; font-size: 13px; orphans: 2; widows: 2;\">The plug flow reactor model have following connection ports:</span></div><div><div style=\"orphans: 2; widows: 2;\"><ol><li><font face=\"Arial, Helvetica, sans-serif\"><span style=\"font-size: 13px;\">Two Material Streams:</span></font></li><ul><li><span style=\"font-family: Arial, Helvetica, sans-serif; font-size: 13px;\">feed stream</span></li><li><span style=\"font-family: Arial, Helvetica, sans-serif; font-size: 13px;\">outlet stream</span></li></ul><li><font face=\"Arial, Helvetica, sans-serif\"><span style=\"font-size: 13px;\">One Energy Stream:</span></font></li><ul><li><span style=\"font-family: Arial, Helvetica, sans-serif; font-size: 13px;\">heat added</span></li></ul></ol></div></div></div><div style=\"font-size: 12px;\"><br></div><span style=\"font-size: 12px;\">To simulate a plug flow reactor, following calculation parameters must be provided:</span><div><ol style=\"font-size: 12px;\"><li>Calculation Mode (<b>Mode</b>)</li><li>Reaction Basis (<b>Basis</b>)</li><li>Reaction Phase (<b>Phase</b>)</li><li>Outlet Temperature&nbsp;(<b>Tdef</b>)&nbsp;(If calculation mode is Define Outlet Temperature)</li><li>Number of Reactions (<b>Nr</b>)</li><li>Base Component (<b>Base_C</b>)</li><li>Stoichiometric Coefficient of Components in Reaction (<b>Coef_cr</b>)</li><li>Reaction Order (<b>DO_cr</b>)</li><li>Pre-exponential Factor (<b>Af_r</b>)</li><li>Activation Energy (<b>Ef_r</b>)</li><li>Pressure Drop (<b>Pdel</b>)</li></ol><div><div style=\"font-size: 12px; orphans: 2; widows: 2;\"><span style=\"orphans: auto; widows: auto;\">Among the above variables, first three variables are&nbsp;of type&nbsp;<i>parameter String</i>. First one, Calculation Mode (<b>Mode</b>) can have either of the sting values among the following:</span></div><div style=\"orphans: 2; widows: 2;\"><ol style=\"font-size: 12px;\"><li><b>Isothermal</b>: If the reactor is operated isothermally</li><li><b>Define Outlet Temperature</b>: If the reactor is operated at specified outlet temperature</li><li><b>Adiabatic</b>: If the reactor is operated adiabatically</li></ol><div style=\"font-size: 12px;\">Second one, Reaction Basis (<b>Basis</b>) can have either of the string values among the following:</div><div><ol><li><b>Molar Concentration</b>: If the reaction rate is defined in terms of Molar Concentration</li><li><b>Mass Concentration</b>:&nbsp;If the reaction rate is defined in terms of Mass Concentration</li><li><b>Molar Fractions</b>:&nbsp;If the reaction rate is defined in terms of Molar Fractions</li><li><b>Mass Fractions</b>:&nbsp;If the reaction rate is defined in terms of Mass Fractions</li></ol><div>Third one, Reaction Phase (<b>Phase</b>), can have either of the string values among the following:</div></div><div><ol><li><b>Mixture</b>: If the reaction is a mixed phase reaction</li><li><b>Liquid</b>: If the reaction is a liquid phase reaction</li><li><b>Vapour</b>: If the reaction is a vapour phase reaction</li></ol></div><div style=\"font-size: 12px;\"><br></div></div></div><div style=\"font-size: 12px;\">The other variables are of type&nbsp;<i>parameter Real.</i></div></div><div style=\"font-size: 12px;\"><div>During simulation, their values can specified directly under&nbsp;<b>Reactor Specifications and Reactions&nbsp;</b>by double clicking on the PFR model instance.</div><div><br></div></div><div style=\"font-size: 12px;\"><br></div><div style=\"font-size: 12px;\">For detailed explanation on how to use this model to simulate a Plug Flow Reactor Reactor, go to&nbsp;<a href=\"modelica://Simulator.Examples.PFR\">Plug Flow Reactor Example</a>.</div><div><br></div></body></html>"));
+ Documentation(info = "<html><head></head><body><div style=\"font-size: 12px;\">The&nbsp;<b>Plug Flow Reactor (PFR)</b>&nbsp;is used to calculate the mole fraction of components at outlet stream when the reaction kinetics is defined.</div><div style=\"font-size: 12px;\"><br></div><div style=\"font-size: 12px;\"><div><span style=\"font-family: Arial, Helvetica, sans-serif; font-size: 13px; orphans: 2; widows: 2;\">The plug flow reactor model have following connection ports:</span></div><div><div style=\"orphans: 2; widows: 2;\"><ol><li><font face=\"Arial, Helvetica, sans-serif\"><span style=\"font-size: 13px;\">Two Material Streams:</span></font></li><ul><li><span style=\"font-family: Arial, Helvetica, sans-serif; font-size: 13px;\">feed stream</span></li><li><span style=\"font-family: Arial, Helvetica, sans-serif; font-size: 13px;\">outlet stream</span></li></ul><li><font face=\"Arial, Helvetica, sans-serif\"><span style=\"font-size: 13px;\">One Energy Stream:</span></font></li><ul><li><span style=\"font-family: Arial, Helvetica, sans-serif; font-size: 13px;\">heat added</span></li></ul></ol></div></div></div><div style=\"font-size: 12px;\"><br></div><span style=\"font-size: 12px;\">To simulate a plug flow reactor, following calculation parameters must be provided:</span><div><ol style=\"font-size: 12px;\"><li>Calculation Mode (<b>Mode</b>)</li><li>Reaction Basis (<b>Basis</b>)</li><li>Reaction Phase (<b>Phase</b>)</li><li>Outlet Temperature&nbsp;(<b>Tdef</b>)&nbsp;(If calculation mode is Define Outlet Temperature)</li><li>Number of Reactions (<b>Nr</b>)</li><li>Base Component (<b>Base_C</b>)</li><li>Stoichiometric Coefficient of Components in Reaction (<b>Coef_cr</b>)</li><li>Reaction Order (<b>DO_cr</b>)</li><li>Pre-exponential Factor (<b>Af_r</b>)</li><li>Activation Energy (<b>Ef_r</b>)</li><li>Pressure Drop (<b>Pdel</b>)</li></ol><div><div style=\"font-size: 12px; orphans: 2; widows: 2;\"><span style=\"orphans: auto; widows: auto;\">Among the above variables, first three variables are&nbsp;of type&nbsp;<i>parameter String</i>. First one, Calculation Mode (<b>Mode</b>) can have either of the sting values among the following:</span></div><div style=\"orphans: 2; widows: 2;\"><ol style=\"font-size: 12px;\"><li><b>Isothermal</b>: If the reactor is operated isothermally</li><li><b>Define Outlet Temperature</b>: If the reactor is operated at specified outlet temperature</li><li><b>Adiabatic</b>: If the reactor is operated adiabatically</li></ol><div style=\"font-size: 12px;\">Second one, Reaction Basis (<b>Basis</b>) can have either of the string values among the following:</div><div><ol><li><b>Molar Concentration</b>: If the reaction rate is defined in terms of Molar Concentration</li><li><b>Mass Concentration</b>:&nbsp;If the reaction rate is defined in terms of Mass Concentration</li><li><b>Molar Fractions</b>:&nbsp;If the reaction rate is defined in terms of Molar Fractions</li><li><b>Mass Fractions</b>:&nbsp;If the reaction rate is defined in terms of Mass Fractions</li></ol><div>Third one, Reaction Phase (<b>Phase</b>), can have either of the string values among the following:</div></div><div><ol><li><b>Mixture</b>: If the reaction is a mixed phase reaction</li><li><b>Liquid</b>: If the reaction is a liquid phase reaction</li><li><b>Vapour</b>: If the reaction is a vapour phase reaction</li></ol></div><div style=\"font-size: 12px;\"><br></div></div></div><div style=\"font-size: 12px;\">The other variables are of type&nbsp;<i>parameter Real.</i></div></div><div style=\"font-size: 12px;\"><div>During simulation, their values can specified directly under&nbsp;<b>Reactor Specifications and Reactions&nbsp;</b>by double clicking on the PFR model instance.</div><div><br></div></div><div style=\"font-size: 12px;\"><br></div><div style=\"font-size: 12px;\">For detailed explanation on how to use this model to simulate a Plug Flow Reactor Reactor, go to&nbsp;<a href=\"modelica://ChemProc.Examples.PFR\">Plug Flow Reactor Example</a>.</div><div><br></div></body></html>"));
   end PFR;

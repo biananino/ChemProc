@@ -85,15 +85,15 @@ package UNIQUAC
   model Pxy
     extends Modelica.Icons.Example;
     //Libraries
-    import Simulator.*;
+    import ChemProc.*;
     //Extension of Chemsep Database
-    import data = Simulator.Files.ChemsepDatabase;
+    import data = ChemProc.Files.ChemsepDatabase;
     //Parameter Section
     //Selection of compounds
     parameter data.Water wat;
     parameter data.Ethanol eth;
     //Instantiation of selected compounds
-    parameter Simulator.Files.ChemsepDatabase.GeneralProperties comp[NOC] = {wat, eth};
+    parameter ChemProc.Files.ChemsepDatabase.GeneralProperties comp[NOC] = {wat, eth};
     parameter Integer NOC = 2 "Number of components";
     parameter Integer Choice = 1 "System choice of Txy or Pxy";
     parameter Real T(unit = "K") = 315 "System Temperature";
@@ -102,7 +102,7 @@ package UNIQUAC
     Real towk[N + 1, NOC, NOC];
     parameter Integer N = 40 "Number of points of data generation";
     Real delta "Increment step";
-    parameter Real a[NOC, NOC] = Simulator.Files.ThermodynamicFunctions.BIPUNIQUAC(NOC, comp.name) "Interaction Parameters";
+    parameter Real a[NOC, NOC] = ChemProc.Files.ThermodynamicFunctions.BIPUNIQUAC(NOC, comp.name) "Interaction Parameters";
     //UNIQUAC parameters instantiated from Chemsep Database
     parameter Real R[NOC] = comp.UniquacR;
     parameter Real Q[NOC] = comp.UniquacQ;
@@ -127,7 +127,7 @@ package UNIQUAC
 //Calculation of Vapour Pressure at the input temperature
 //Thermodynamic Function Psat is instantiated from Simulator Package
     for i in 1:NOC loop
-      Psat[i] = Simulator.Files.ThermodynamicFunctions.Psat(comp[i].VP, T);
+      Psat[i] = ChemProc.Files.ThermodynamicFunctions.Psat(comp[i].VP, T);
     end for;
 //Calculation of increment step for the total number of points
     delta = 1 / N;
@@ -140,7 +140,7 @@ package UNIQUAC
       end for;
     end for;
 //Calculation of Empherical parameter (tow) at the system temperature
-    tow = Simulator.Files.ThermodynamicFunctions.TowUNIQUAC(NOC, a, T);
+    tow = ChemProc.Files.ThermodynamicFunctions.TowUNIQUAC(NOC, a, T);
 //Generation of mole fraction from 0 to 1 in steps of "delta"
     z1[1] = 0;
     for i in 2:N + 1 loop
@@ -168,15 +168,15 @@ package UNIQUAC
   model Txy
     extends Modelica.Icons.Example;
     //Libraries
-    import Simulator.*;
+    import ChemProc.*;
     //Extension of Chemsep database
-    import data = Simulator.Files.ChemsepDatabase;
+    import data = ChemProc.Files.ChemsepDatabase;
     //Parameter Section
     //Selection of compounds
     parameter data.Water wat;
     parameter data.Ethanol eth;
     //Instantiation of selected compounds
-    parameter Simulator.Files.ChemsepDatabase.GeneralProperties comp[NOC] = {wat, eth};
+    parameter ChemProc.Files.ChemsepDatabase.GeneralProperties comp[NOC] = {wat, eth};
     parameter Integer Choice = 2 "System choice of Txy or Pxy";
     parameter Integer NOC = 2 "Number of components";
     parameter Real P(unit = "Pa") = 101325 "System Pressure";
@@ -184,7 +184,7 @@ package UNIQUAC
     //UNIQUAC Parameters
     parameter Real R[NOC] = comp.UniquacR;
     parameter Real Q[NOC] = comp.UniquacQ;
-    parameter Real a[NOC, NOC] = Simulator.Files.ThermodynamicFunctions.BIPUNIQUAC(NOC, comp.name) "Interaction temperatures";
+    parameter Real a[NOC, NOC] = ChemProc.Files.ThermodynamicFunctions.BIPUNIQUAC(NOC, comp.name) "Interaction temperatures";
     //Variable Section
     Real delta "Increment step";
     //Empherical parameter (towk) at different temperatures
@@ -248,7 +248,7 @@ package UNIQUAC
     end for;
 //Calculation of vapour pressures at different temperatures
     for i in 1:N + 1 loop
-      Psat[i, 1] = Simulator.Files.ThermodynamicFunctions.Psat(comp[1].VP, T[i]);
+      Psat[i, 1] = ChemProc.Files.ThermodynamicFunctions.Psat(comp[1].VP, T[i]);
     end for;
   end Txy;
 

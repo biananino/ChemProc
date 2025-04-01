@@ -20,15 +20,15 @@ package ChemProc "OpenModelica Chemical Simulator (OMChemSim) - Version 0.9"
     Documentation(info = "<html>
     <p>
     Package <b>OMChemSim (OpenModelica Chemical Simulator)</b> is a <b>standardized</b> and <b>free</b> package that is developed at FOSSEE, IIT Bombay. It provides model components for steady state chemical process simulation. Some typical examples are shown in the next figure:
-<img src=\"modelica://Simulator/Resources/Images/OMChemSimOverview.png\">
+<img src=\"modelica://ChemProc/Resources/Images/OMChemSimOverview.png\">
     </p>
     <p>
     For an introduction, have especially a look at:
     <ul>
     <li>
-    <a href=\"modelica://Simulator.UsersGuide.Overview\">Overview</a> provides an overview of the OMChemSim inside the <a href=\"modelica://Simulator.UsersGuide\">User's Guide</a>.</li>
-    <li><a href=\"modelica://Simulator.UsersGuide.ReleaseNotes\">Release Notes</a> summarizes the changes of new versions of this package.</li>
-    <li><a href=\"modelica:///Simulator.UsersGuide.Contact\">Contact</a> lists the contributors and contact information for OMChemSim.</li>
+    <a href=\"modelica://ChemProc.UsersGuide.Overview\">Overview</a> provides an overview of the OMChemSim inside the <a href=\"modelica://ChemProc.UsersGuide\">User's Guide</a>.</li>
+    <li><a href=\"modelica://ChemProc.UsersGuide.ReleaseNotes\">Release Notes</a> summarizes the changes of new versions of this package.</li>
+    <li><a href=\"modelica:///ChemProc.UsersGuide.Contact\">Contact</a> lists the contributors and contact information for OMChemSim.</li>
     <li>The <strong>Examples</strong>&nbsp;packages in the various libraries, demonstrate how to use the components of the corresponding sublibrary.</li>
     </ul>
     </p>

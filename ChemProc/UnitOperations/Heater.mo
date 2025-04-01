@@ -1,9 +1,9 @@
 within ChemProc.UnitOperations;
 
 model Heater "Model of a heater to heat a material stream"
-  extends Simulator.Files.Icons.Heater;
+  extends ChemProc.Files.Icons.Heater;
   
-    parameter Simulator.Files.ChemsepDatabase.GeneralProperties C[Nc] "Component instances array" annotation(
+    parameter ChemProc.Files.ChemsepDatabase.GeneralProperties C[Nc] "Component instances array" annotation(
     Dialog(tab = "Heater Specifications", group = "Component Parameters"));
     parameter Integer Nc "Number of components" annotation(
     Dialog(tab = "Heater Specifications", group = "Component Parameters"));
@@ -28,11 +28,11 @@ model Heater "Model of a heater to heat a material stream"
   parameter Real Eff(unit = "-") "Efficiency" annotation(
     Dialog(tab = "Heater Specifications", group = "Calculation Parameters"));
   //========================================================================================
-  Simulator.Files.Interfaces.matConn In(Nc = Nc) annotation(
+  ChemProc.Files.Interfaces.matConn In(Nc = Nc) annotation(
     Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Simulator.Files.Interfaces.matConn Out(Nc = Nc) annotation(
+  ChemProc.Files.Interfaces.matConn Out(Nc = Nc) annotation(
     Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, -2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Simulator.Files.Interfaces.enConn En annotation(
+  ChemProc.Files.Interfaces.enConn En annotation(
     Placement(visible = true, transformation(origin = {0, -100}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-98, -98}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   //=========================================================================================
   extends GuessModels.InitialGuess;
@@ -95,6 +95,6 @@ equation
     <div>During simulation, value of one of these variables need to be defined in the equation section.</div></p>
     <p>&nbsp;</p>
     
-    <p>For detailed explanation on how to use this model to simulate a Heater, go to <a href=\"modelica://Simulator.Examples.Heater\">Heater Example</a></p>
+    <p>For detailed explanation on how to use this model to simulate a Heater, go to <a href=\"modelica://ChemProc.Examples.Heater\">Heater Example</a></p>
     </html>"));
 end Heater;

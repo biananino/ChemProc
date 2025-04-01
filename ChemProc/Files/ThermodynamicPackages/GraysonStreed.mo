@@ -4,12 +4,12 @@ within ChemProc.Files.ThermodynamicPackages;
   
   //====================================================================
   //Header Files and Parameters
-    import Simulator.Files.ThermodynamicFunctions.*;
+    import ChemProc.Files.ThermodynamicFunctions.*;
     parameter Integer Nc "Number of components";
-    parameter Simulator.Files.ChemsepDatabase.GeneralProperties C[Nc];
+    parameter ChemProc.Files.ChemsepDatabase.GeneralProperties C[Nc];
     parameter Real R = 8.314;
     parameter Real u = 1;
-    import Simulator.Files.*;
+    import ChemProc.Files.*;
     parameter Real W_c[Nc];
     parameter Real SP_c[Nc](each unit = "(cal/mL)^0.5");
     parameter Real V_c[Nc](each unit = "mL/mol");
@@ -51,22 +51,22 @@ within ChemProc.Files.ThermodynamicPackages;
   equation
 //======================================================================================================
 //Calculation Routine for Liquid Phase Fugacity Coefficient
-    S = Simulator.Files.ThermodynamicFunctions.SolublityParameter(Nc, V_c, SP_c, x_pc[2, :]);
+    S = ChemProc.Files.ThermodynamicFunctions.SolublityParameter(Nc, V_c, SP_c, x_pc[2, :]);
     for i in 1:Nc loop
       gma_c[i] = exp(V_c[i] * (SP_c[i] - S) ^ 2 / (Rgas * T));
     end for;
-    philiq_c = Simulator.Files.ThermodynamicFunctions.LiquidFugacityCoeffcient(Nc, T_c, Pc_c, W_c, T, P, V_c, S, gma_c);
+    philiq_c = ChemProc.Files.ThermodynamicFunctions.LiquidFugacityCoeffcient(Nc, T_c, Pc_c, W_c, T, P, V_c, S, gma_c);
     for i in 1:Nc loop
-      Pvap_c[i] = Simulator.Files.ThermodynamicFunctions.Psat(C[i].VP, T);
+      Pvap_c[i] = ChemProc.Files.ThermodynamicFunctions.Psat(C[i].VP, T);
       gmaliq_c[i] = philiq_c[i] * (P / Pvap_c[i]);
     end for;
 //========================================================================================================
 //Calculation Routine for Vapour Phase Fugacity Coefficient
 //Calculation of Equation of State Constants
-    a_c = Simulator.Files.ThermodynamicFunctions.EOSConstants(Nc, T_c, Pc_c, T);
-    b_c = Simulator.Files.ThermodynamicFunctions.EOSConstantII(Nc, T_c, Pc_c, T);
-    aij_c = Simulator.Files.ThermodynamicFunctions.EOSConstantIII(Nc, a_c);
-    amv = Simulator.Files.ThermodynamicFunctions.EOSConstant1V(Nc, x_pc[3, :], aij_c);
+    a_c = ChemProc.Files.ThermodynamicFunctions.EOSConstants(Nc, T_c, Pc_c, T);
+    b_c = ChemProc.Files.ThermodynamicFunctions.EOSConstantII(Nc, T_c, Pc_c, T);
+    aij_c = ChemProc.Files.ThermodynamicFunctions.EOSConstantIII(Nc, a_c);
+    amv = ChemProc.Files.ThermodynamicFunctions.EOSConstant1V(Nc, x_pc[3, :], aij_c);
     bmv = sum(x_pc[3, :] .* b_c[:]);
     Avap = amv * P / (R * T) ^ 2;
     Bvap = bmv * P / (R * T);
@@ -139,7 +139,7 @@ within ChemProc.Files.ThermodynamicPackages;
         xliqdew_c[i] = x_pc[1, i] * Pdew / (gmadew_c[i] * Pvap_c[i]);
       end if;
     end for;
-    amvdew = Simulator.Files.ThermodynamicFunctions.EOSConstant1V(Nc, xliqdew_c[:], aij_c);
+    amvdew = ChemProc.Files.ThermodynamicFunctions.EOSConstant1V(Nc, xliqdew_c[:], aij_c);
     bmvdew = sum(xliqdew_c[:] .* b_c[:]);
     Avapdew = amvdew * Pdew / (R * T) ^ 2;
     Bvapdew = bmvdew * Pdew / (R * T);

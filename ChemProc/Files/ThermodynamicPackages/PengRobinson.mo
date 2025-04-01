@@ -4,9 +4,9 @@ within ChemProc.Files.ThermodynamicPackages;
   
   //=====================================================================
   //Header files and Parameters
-    import Simulator.Files.*;
+    import ChemProc.Files.*;
     parameter Real R = 8.314 "Ideal Gas Constant";
-    parameter Real kij_c[Nc, Nc](each start = 1) = Simulator.Files.ThermodynamicFunctions.BIPPR(Nc, C.name);
+    parameter Real kij_c[Nc, Nc](each start = 1) = ChemProc.Files.ThermodynamicFunctions.BIPPR(Nc, C.name);
   
   //======================================================================
   //Stream variables
@@ -46,7 +46,7 @@ within ChemProc.Files.ThermodynamicPackages;
   //======================================================================
   equation
     for i in 1:Nc loop
-      Pvap_c[i] = Simulator.Files.ThermodynamicFunctions.Psat(C[i].VP, T);
+      Pvap_c[i] = ChemProc.Files.ThermodynamicFunctions.Psat(C[i].VP, T);
       gmadew_c[i] = 1;
       gmabubl_c[i] = 1;
       philiqbubl_c[i] = 1;

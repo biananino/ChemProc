@@ -1,7 +1,7 @@
 within ChemProc.UnitOperations.DistillationColumn;
 
   model DistTray "Model of a tray used in distillation column"
-    import Simulator.Files.*;
+    import ChemProc.Files.*;
     parameter ChemsepDatabase.GeneralProperties C[Nc];
     parameter Integer Nc "Number of components";
     parameter Boolean Bin = true;
@@ -38,21 +38,21 @@ within ChemProc.UnitOperations.DistillationColumn;
   //this is adjustment done since OpenModelica 1.11 is not handling array modification properly
     String OutType(start = "Null");
     //L or V
-    replaceable Simulator.Files.Interfaces.matConn In(Nc = Nc) if Bin annotation(
+    replaceable ChemProc.Files.Interfaces.matConn In(Nc = Nc) if Bin annotation(
       Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    replaceable Simulator.Files.Interfaces.matConn In_Dmy(Nc = Nc, P = 0, T = 0, F = 0, x_pc = zeros(3, Nc), H = 0, S = 0, xvap = 0) if not Bin annotation(
+    replaceable ChemProc.Files.Interfaces.matConn In_Dmy(Nc = Nc, P = 0, T = 0, F = 0, x_pc = zeros(3, Nc), H = 0, S = 0, xvap = 0) if not Bin annotation(
       Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.matConn Out(Nc = Nc) annotation(
+    ChemProc.Files.Interfaces.matConn Out(Nc = Nc) annotation(
       Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.trayConn In_Liq(Nc = Nc) annotation(
+    ChemProc.Files.Interfaces.trayConn In_Liq(Nc = Nc) annotation(
       Placement(visible = true, transformation(origin = {-50, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-50, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.trayConn Out_Liq(Nc = Nc) annotation(
+    ChemProc.Files.Interfaces.trayConn Out_Liq(Nc = Nc) annotation(
       Placement(visible = true, transformation(origin = {-50, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-50, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.trayConn Out_Vap(Nc = Nc) annotation(
+    ChemProc.Files.Interfaces.trayConn Out_Vap(Nc = Nc) annotation(
       Placement(visible = true, transformation(origin = {50, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {50, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.trayConn In_Vap(Nc = Nc) annotation(
+    ChemProc.Files.Interfaces.trayConn In_Vap(Nc = Nc) annotation(
       Placement(visible = true, transformation(origin = {50, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {50, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.enConn En annotation(
+    ChemProc.Files.Interfaces.enConn En annotation(
       Placement(visible = true, transformation(origin = {100, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   extends GuessModels.InitialGuess;
         

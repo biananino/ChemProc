@@ -2,8 +2,8 @@ within ChemProc.Files.Models.ReactionManager;
 
 model EquilibriumReaction "Model of an equilibrium reaction used in equilibrium reactor"
   //===================================================================================================
-  import Simulator.Files.*;
-  import data = Simulator.Files.ChemsepDatabase;
+  import ChemProc.Files.*;
+  import data = ChemProc.Files.ChemsepDatabase;
 
   parameter Integer Nr "Number of reactions" annotation(
     Dialog(tab = "Reactions", group = "Equilibrium Reaction Parameters"));
@@ -30,12 +30,12 @@ model EquilibriumReaction "Model of an equilibrium reaction used in equilibrium 
   Real K[Nr](each start=xliqg);
   Real N[Nr](each start= Fg),D[Nr](each start=Fg);
   
-  extends Simulator.GuessModels.InitialGuess;
+  extends ChemProc.GuessModels.InitialGuess;
 equation
  
 
 //Check of stoichiometric balance
-  Schk_r = Simulator.Files.Models.ReactionManager.Stoichiometrycheck(Nr, Nc, C[:].MW, Coef_cr);
+  Schk_r = ChemProc.Files.Models.ReactionManager.Stoichiometrycheck(Nr, Nc, C[:].MW, Coef_cr);
 //Calculation of Heat of Reaction
   Hf_c[:] = C[:].IGHF .* 1E-3;
 //=============================================================================================

@@ -1,8 +1,8 @@
 within ChemProc.UnitOperations;
 
 model Mixer "Model of a mixer to mix multiple material streams"
-  extends Simulator.Files.Icons.Mixer;
-  import Simulator.Files.*;
+  extends ChemProc.Files.Icons.Mixer;
+  import ChemProc.Files.*;
   parameter ChemsepDatabase.GeneralProperties C[Nc] "Component instances array" annotation(
     Dialog(tab = "Mixer Specifications", group = "Component Parameters"));
   parameter Integer Nc "Number of components" annotation(
@@ -30,9 +30,9 @@ model Mixer "Model of a mixer to mix multiple material streams"
   Real xout_c[Nc](each unit = "-", each min = 0, each max = 1, start = xguess) "Outlet stream component mol fraction";
  //================================================================================
   //  Files.Interfaces.matConn inlet[NI](each Nc = Nc);
-  Simulator.Files.Interfaces.matConn Out(Nc = Nc) annotation(
+  ChemProc.Files.Interfaces.matConn Out(Nc = Nc) annotation(
     Placement(visible = true, transformation(origin = {100, -2}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Simulator.Files.Interfaces.matConn In[NI](each Nc = Nc) annotation(
+  ChemProc.Files.Interfaces.matConn In[NI](each Nc = Nc) annotation(
     Placement(visible = true, transformation(origin = {-100, -2}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   
   extends GuessModels.InitialGuess;
@@ -86,6 +86,6 @@ annotation(
    <div><b>outPress</b> has been declared of type <i>parameter String.&nbsp;</i></div>
     <div>During simulation, it can specified directly under <b>Mixer Specifications</b>by double clicking on the mixer model instance.</div></p>
 <p>&nbsp;</p>
-  <p>  For detailed explanation on how to use this model to simulate a Mixer, go to <a href=\"modelica://Simulator.Examples.Mixer\">Mixer Example</a></p>
+  <p>  For detailed explanation on how to use this model to simulate a Mixer, go to <a href=\"modelica://ChemProc.Examples.Mixer\">Mixer Example</a></p>
     </html>"));
     end Mixer;

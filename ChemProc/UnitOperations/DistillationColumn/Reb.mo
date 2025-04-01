@@ -1,7 +1,7 @@
 within ChemProc.UnitOperations.DistillationColumn;
 
   model Reb "Model of a reboiler used in distillation column"
-    import Simulator.Files.*;
+    import ChemProc.Files.*;
     parameter Integer Nc "Number of components";
     parameter ChemsepDatabase.GeneralProperties C[Nc];
     parameter Boolean Bin = false;
@@ -31,17 +31,17 @@ within ChemProc.UnitOperations.DistillationColumn;
     Real gma_c[Nc], gmabubl_c[Nc], gmadew_c[Nc];
     Real philiqbubl_c[Nc], phivapdew_c[Nc], Pvap_c[Nc];  
    
-    replaceable Simulator.Files.Interfaces.matConn In(Nc = Nc) if Bin annotation(
+    replaceable ChemProc.Files.Interfaces.matConn In(Nc = Nc) if Bin annotation(
       Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    replaceable Simulator.Files.Interfaces.matConn In_Dmy(Nc = Nc, P = 0, T = 0, x_pc = zeros(3, Nc), F = 0, H = 0, S = 0, xvap = 0) if not Bin annotation(
+    replaceable ChemProc.Files.Interfaces.matConn In_Dmy(Nc = Nc, P = 0, T = 0, x_pc = zeros(3, Nc), F = 0, H = 0, S = 0, xvap = 0) if not Bin annotation(
       Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.matConn Out(Nc = Nc) annotation(
+    ChemProc.Files.Interfaces.matConn Out(Nc = Nc) annotation(
       Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.trayConn In_Liq(Nc = Nc) annotation(
+    ChemProc.Files.Interfaces.trayConn In_Liq(Nc = Nc) annotation(
       Placement(visible = true, transformation(origin = {-50, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-50, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.trayConn Out_Vap(Nc = Nc) annotation(
+    ChemProc.Files.Interfaces.trayConn Out_Vap(Nc = Nc) annotation(
       Placement(visible = true, transformation(origin = {50, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {50, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.enConn En annotation(
+    ChemProc.Files.Interfaces.enConn En annotation(
       Placement(visible = true, transformation(origin = {100, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     
     extends GuessModels.InitialGuess;
@@ -89,7 +89,7 @@ within ChemProc.UnitOperations.DistillationColumn;
 //    sum(xvapout_c[:]) = 1;
     sum(xout_c[:]) = 1;
     for i in 1:Nc loop
-      Hvapout_c[i] = Simulator.Files.ThermodynamicFunctions.HVapId(C[i].SH, C[i].VapCp, C[i].HOV, C[i].Tc, T);
+      Hvapout_c[i] = ChemProc.Files.ThermodynamicFunctions.HVapId(C[i].SH, C[i].VapCp, C[i].HOV, C[i].Tc, T);
     end for;
     Hvapout = sum(xvapout_c[:] .* Hvapout_c[:]) + Hres_p[3];
 // bubble point calculations

@@ -1,7 +1,7 @@
 within ChemProc.UnitOperations.AbsorptionColumn;
 
 model AbsTray "Model of a tray used in absorption column"
-    import Simulator.Files.*;
+    import ChemProc.Files.*;
     parameter Integer Nc;
     parameter ChemsepDatabase.GeneralProperties C[Nc];
     Real P(min = 0, start = Pg);
@@ -19,13 +19,13 @@ model AbsTray "Model of a tray used in absorption column"
     Real gma_c[Nc], gmabubl_c[Nc], gmadew_c[Nc];
     Real philiqbubl_c[Nc], phivapdew_c[Nc], Pvap_c[Nc];
   
-    Simulator.Files.Interfaces.trayConn In_Liq(Nc = Nc) annotation(
+    ChemProc.Files.Interfaces.trayConn In_Liq(Nc = Nc) annotation(
       Placement(visible = true, transformation(origin = {-50, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-50, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.trayConn Out_Liq(Nc = Nc) annotation(
+    ChemProc.Files.Interfaces.trayConn Out_Liq(Nc = Nc) annotation(
       Placement(visible = true, transformation(origin = {-50, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-50, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.trayConn Out_Vap(Nc = Nc) annotation(
+    ChemProc.Files.Interfaces.trayConn Out_Vap(Nc = Nc) annotation(
       Placement(visible = true, transformation(origin = {50, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {50, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.trayConn In_Vap(Nc = Nc) annotation(
+    ChemProc.Files.Interfaces.trayConn In_Vap(Nc = Nc) annotation(
       Placement(visible = true, transformation(origin = {50, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {50, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   
     extends GuessModels.InitialGuess;

@@ -2,8 +2,8 @@ within ChemProc.Streams;
 
 model MaterialStream "Model representing Material Stream"
   //1 -  Mixture, 2 - Liquid phase, 3 - Gas Phase
-  extends Simulator.Files.Icons.MaterialStream;
-  import Simulator.Files.*;
+  extends ChemProc.Files.Icons.MaterialStream;
+  import ChemProc.Files.*;
   //Thermodynamics packages variables
   Real K_c[Nc](each min = 0), Cpres_p[3], Hres_p[3], Sres_p[3];
   Real gma_c[Nc], gmabubl_c[Nc], gmadew_c[Nc];
@@ -30,9 +30,9 @@ model MaterialStream "Model representing Material Stream"
   Real H_pc[3, Nc](each unit = "kJ/kmol") "Component molar enthalpy in phase";
   Real S_p[3](each unit = "kJ/[kmol.K]") "Phase molar entropy";
   Real S_pc[3, Nc](each unit = "kJ/[kmol.K]") "Component molar entropy in phase";
-  Simulator.Files.Interfaces.matConn In(Nc = Nc) annotation(
+  ChemProc.Files.Interfaces.matConn In(Nc = Nc) annotation(
     Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Simulator.Files.Interfaces.matConn Out(Nc = Nc) annotation(
+  ChemProc.Files.Interfaces.matConn Out(Nc = Nc) annotation(
     Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 
   extends GuessModels.InitialGuess;
@@ -139,7 +139,7 @@ algorithm
 annotation(
     Documentation(info = "<html><head></head><body><div><!--StartFragment-->A <strong>Material Stream</strong> represents whatever enters and leaves the simulation passing through the unit operations.<!--EndFragment-->
 
-</div><div><br></div><div>For variables which are decalared as 1-D array, the array size represent the phase where the array element indices 1 represents mixed phase, 2 represents liquid phase and 3 represents vapor phase.</div><div><br></div><div>For example, variable <b>F_p[3]</b> represents <i>Total molar flow in different phase</i>. So when simulated, the variables in the results will be as follow:</div><div>F_p[1] is Molar flow in mixed phase</div><div>F_p[2] is Molar flow in liquid phase</div><div>F_p[3] is Molar flow in vapor phase</div><div><br></div><div><br></div><div>For variables which are decalared as 2-D array, the first indice represent phase and second indice represents components.<div><br></div><div>For example, variable&nbsp;<b>F_pc[3,Nc]</b>&nbsp;represents <i>Component&nbsp;molar flow in different phase</i>. So when simulated, the variables in the results will be as follow:</div><div>F_pc[1,Nc] is Molar flow of Nc<sup>th</sup> in mixed phase</div><div>F_pc[2,Nc] is Molar flow of Nc<sup>th</sup> in liquid phase</div><div>F_pc[3,Nc] is Molar flow of Nc<sup>th</sup> in vapor phase</div></div><div><br></div><div><br></div><div><!--StartFragment--><span style=\"font-size: 12px;\">For demonstration on how to use this model to simulate a Material Stream,</span><span style=\"font-size: 12px;\">&nbsp;go to&nbsp;<a href=\"modelica://Simulator.Examples.CompositeMS\">Material Stream Example</a></span><!--EndFragment--></div></body></html>"));
+</div><div><br></div><div>For variables which are decalared as 1-D array, the array size represent the phase where the array element indices 1 represents mixed phase, 2 represents liquid phase and 3 represents vapor phase.</div><div><br></div><div>For example, variable <b>F_p[3]</b> represents <i>Total molar flow in different phase</i>. So when simulated, the variables in the results will be as follow:</div><div>F_p[1] is Molar flow in mixed phase</div><div>F_p[2] is Molar flow in liquid phase</div><div>F_p[3] is Molar flow in vapor phase</div><div><br></div><div><br></div><div>For variables which are decalared as 2-D array, the first indice represent phase and second indice represents components.<div><br></div><div>For example, variable&nbsp;<b>F_pc[3,Nc]</b>&nbsp;represents <i>Component&nbsp;molar flow in different phase</i>. So when simulated, the variables in the results will be as follow:</div><div>F_pc[1,Nc] is Molar flow of Nc<sup>th</sup> in mixed phase</div><div>F_pc[2,Nc] is Molar flow of Nc<sup>th</sup> in liquid phase</div><div>F_pc[3,Nc] is Molar flow of Nc<sup>th</sup> in vapor phase</div></div><div><br></div><div><br></div><div><!--StartFragment--><span style=\"font-size: 12px;\">For demonstration on how to use this model to simulate a Material Stream,</span><span style=\"font-size: 12px;\">&nbsp;go to&nbsp;<a href=\"modelica://ChemProc.Examples.CompositeMS\">Material Stream Example</a></span><!--EndFragment--></div></body></html>"));
     
     end MaterialStream;
 

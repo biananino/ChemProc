@@ -5,15 +5,15 @@ package UNIFAC
   model Pxy
   extends Modelica.Icons.Example;
     //Libraries
-    import Simulator.*;
+    import ChemProc.*;
     //Extension of Chemsep Database
-    import data = Simulator.Files.ChemsepDatabase;
+    import data = ChemProc.Files.ChemsepDatabase;
     //Parameter Section
     //Selection of compounds
     parameter data.Methylethylketone meth;
     parameter data.Aceticacid eth;
     //Instantiation of selected compounds
-    parameter Simulator.Files.ChemsepDatabase.GeneralProperties comp[NOC] = {meth, eth};
+    parameter ChemProc.Files.ChemsepDatabase.GeneralProperties comp[NOC] = {meth, eth};
     parameter Integer NOC = 2 "Number of components";
     parameter Integer Choice = 1 "System choice of Txy or Pxy";
     parameter Real T(unit = "K") = 375 "System Temperature";
@@ -61,7 +61,7 @@ package UNIFAC
 //Calculation of Vapour Pressure at the input temperature
 //Thermodynamic Function Psat is instantiated from Simulator Package
     for i in 1:NOC loop
-      Psat[i] = Simulator.Files.ThermodynamicFunctions.Psat(comp[i].VP, T);
+      Psat[i] = ChemProc.Files.ThermodynamicFunctions.Psat(comp[i].VP, T);
     end for;
 //Calculation of increment step for the total number of points
     delta = 1 / N;
@@ -133,15 +133,15 @@ package UNIFAC
   model Txy
     extends Modelica.Icons.Example;
     //Libraries
-    import Simulator.*;
+    import ChemProc.*;
     //Extension of Chemsep Database
-    import data = Simulator.Files.ChemsepDatabase;
+    import data = ChemProc.Files.ChemsepDatabase;
     //Parameter Section
     //Selection of compounds
     parameter data.Methylethylketone meth;
     parameter data.Aceticacid eth;
     //Instantiation of selected compounds
-    parameter Simulator.Files.ChemsepDatabase.GeneralProperties comp[NOC] = {meth, eth};
+    parameter ChemProc.Files.ChemsepDatabase.GeneralProperties comp[NOC] = {meth, eth};
     parameter Real Z = 10 "Compressiblity Factor";
     parameter Integer Choice = 2 "System choice of Txy or Pxy";
     parameter Integer NOC = 2 "Number of components";
@@ -190,7 +190,7 @@ package UNIFAC
     delta = 1 / N;
 //Calculation of vapour pressures at different temperatures
     for i in 1:N + 1 loop
-      Psat[i, 1] = Simulator.Files.ThermodynamicFunctions.Psat(comp[1].VP, T[i]);
+      Psat[i, 1] = ChemProc.Files.ThermodynamicFunctions.Psat(comp[1].VP, T[i]);
     end for;
 //Generation of mole fraction from 0 to 1 in steps of "delta"
     z1[1] = 0;

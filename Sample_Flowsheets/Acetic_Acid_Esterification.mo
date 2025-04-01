@@ -1,34 +1,34 @@
 package Acetic_Acid_Esterification
 
 model ms
-  extends Simulator.Streams.MaterialStream;
-  extends Simulator.Files.ThermodynamicPackages.NRTL;
+  extends ChemProc.Streams.MaterialStream;
+  extends ChemProc.Files.ThermodynamicPackages.NRTL;
 end ms;
 
 model Fls
-  extends Simulator.UnitOperations.Flash;
-  extends Simulator.Files.ThermodynamicPackages.NRTL;
+  extends ChemProc.UnitOperations.Flash;
+  extends ChemProc.Files.ThermodynamicPackages.NRTL;
 end Fls;
 
 model Conv_React
-  extends Simulator.UnitOperations.ConversionReactor;
-  extends Simulator.Files.Models.ReactionManager.ConversionReaction;
+  extends ChemProc.UnitOperations.ConversionReactor;
+  extends ChemProc.Files.Models.ReactionManager.ConversionReaction;
 end Conv_React;
 
 model Flowsheet
 
-  import data = Simulator.Files.ChemsepDatabase;
+  import data = ChemProc.Files.ChemsepDatabase;
   parameter Integer Nc = 4;
   parameter data.Ethylacetate etac;
   parameter data.Water wat;
   parameter data.Aceticacid aa;
   parameter data.Ethanol eth;
   parameter data.GeneralProperties C[Nc] = {etac, wat, aa, eth};
-  Simulator.UnitOperations.Mixer MIX_01(C = C, NI = 3, Nc = Nc, outPress = "Inlet_Average")  annotation(
+  ChemProc.UnitOperations.Mixer MIX_01(C = C, NI = 3, Nc = Nc, outPress = "Inlet_Average")  annotation(
       Placement(visible = true, transformation(origin = {-48, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Acetic_Acid_Esterification.Conv_React CR_01(BC_r = {3},C = C, CalcMode = "Define_Out_Temperature", Coef_cr = {{1}, {1}, {-1}, {-1}}, Nc = Nc, Nr = 1, Tdef = 300, X_r = {0.6})  annotation(
       Placement(visible = true, transformation(origin = {16, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Simulator.UnitOperations.Splitter SPLIT_01(C = C, CalcType = "Split_Ratio", Nc = Nc, No = 2)  annotation(
+  ChemProc.UnitOperations.Splitter SPLIT_01(C = C, CalcType = "Split_Ratio", Nc = Nc, No = 2)  annotation(
       Placement(visible = true, transformation(origin = {82, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Acetic_Acid_Esterification.ms S_01(C = C, Nc = Nc)  annotation(
       Placement(visible = true, transformation(origin = {-88, 26}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));

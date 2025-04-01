@@ -2,7 +2,7 @@ within ChemProc.Files.Models;
 
  model Flash
     //this is basic flash model.  comp and Nc has to be defined in model. thermodyanamic model must also be extended along with this model for K value.
-    import Simulator.Files.*;
+    import ChemProc.Files.*;
     Real F_p[3](each min = 0, start = {Fg,Fliqg,Fvapg});
     Real x_pc[3, Nc](each min = 0, each max = 1, start={xguess,xg,yg});
     Real Cp_pc[3, Nc], H_pc[3, Nc], S_pc[3, Nc], Cp_p[3], H_p[3], S_p[3];

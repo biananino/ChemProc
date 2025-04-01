@@ -1,7 +1,7 @@
 within ChemProc.UnitOperations.DistillationColumn;
 
   model Cond "Model of a condenser used in distillation column"
-    import Simulator.Files.*;
+    import ChemProc.Files.*;
     parameter ChemsepDatabase.GeneralProperties C[Nc];
     parameter Integer Nc "Number of components";
     parameter Boolean Bin = false;
@@ -35,17 +35,17 @@ within ChemProc.UnitOperations.DistillationColumn;
     //String sideDrawType(start = "Null");
     //L or V
     parameter String Ctype "Condenser type: Partial or Total";
-    replaceable Simulator.Files.Interfaces.matConn In(Nc = Nc) if Bin annotation(
+    replaceable ChemProc.Files.Interfaces.matConn In(Nc = Nc) if Bin annotation(
       Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.matConn In_Dmy(Nc = Nc, P = 0, T = 0, x_pc = zeros(3, Nc), F = 0, H = 0, S = 0, xvap = 0) if not Bin annotation(
+    ChemProc.Files.Interfaces.matConn In_Dmy(Nc = Nc, P = 0, T = 0, x_pc = zeros(3, Nc), F = 0, H = 0, S = 0, xvap = 0) if not Bin annotation(
       Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.matConn Out(Nc = Nc) annotation(
+    ChemProc.Files.Interfaces.matConn Out(Nc = Nc) annotation(
       Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.trayConn Out_Liq(Nc = Nc) annotation(
+    ChemProc.Files.Interfaces.trayConn Out_Liq(Nc = Nc) annotation(
       Placement(visible = true, transformation(origin = {-50, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-50, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.trayConn In_Vap(Nc = Nc) annotation(
+    ChemProc.Files.Interfaces.trayConn In_Vap(Nc = Nc) annotation(
       Placement(visible = true, transformation(origin = {50, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {50, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Files.Interfaces.enConn En annotation(
+    ChemProc.Files.Interfaces.enConn En annotation(
       Placement(visible = true, transformation(origin = {100, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     
     extends GuessModels.InitialGuess;
@@ -104,7 +104,7 @@ within ChemProc.UnitOperations.DistillationColumn;
     end if;
 // outlet liquid molar enthalpy calculation
     for i in 1:Nc loop
-      Hliqout_c[i] = Simulator.Files.ThermodynamicFunctions.HLiqId(C[i].SH, C[i].VapCp, C[i].HOV, C[i].Tc, T);
+      Hliqout_c[i] = ChemProc.Files.ThermodynamicFunctions.HLiqId(C[i].SH, C[i].VapCp, C[i].HOV, C[i].Tc, T);
     end for;
     Hliqout = sum(xliqout_c[:] .* Hliqout_c[:]) + Hres_p[2];
     annotation(

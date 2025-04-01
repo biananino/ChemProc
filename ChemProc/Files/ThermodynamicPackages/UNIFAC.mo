@@ -2,11 +2,11 @@ within ChemProc.Files.ThermodynamicPackages;
 
  model UNIFAC
     //Libraries
-    import Simulator.Files.*;
-    import Simulator.Files.ThermodynamicFunctions;
+    import ChemProc.Files.*;
+    import ChemProc.Files.ThermodynamicFunctions;
     //Stream Parameters
     parameter Integer Nc "Number of components";
-    parameter Simulator.Files.ChemsepDatabase.GeneralProperties C[Nc];
+    parameter ChemProc.Files.ChemsepDatabase.GeneralProperties C[Nc];
     Real x_pc[3, Nc](each unit = "-", each min = 0, each max = 1); 
     Real P(unit = "Pa", min = 0) "Pressure";
     Real T(unit = "K") "Temperature";
@@ -71,7 +71,7 @@ within ChemProc.Files.ThermodynamicPackages;
     Hres_c[:] = zeros(3);
     Sres_c[:] = zeros(3);
     for i in 1:Nc loop
-      Psat[i] = Simulator.Files.ThermodynamicFunctions.Psat(C[i].VP[:], T);
+      Psat[i] = ChemProc.Files.ThermodynamicFunctions.Psat(C[i].VP[:], T);
     end for;
     for i in 1:Nc loop
       philbubl_c[i] = 1;

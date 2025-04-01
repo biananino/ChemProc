@@ -22,12 +22,12 @@ within ChemProc.Files.ThermodynamicFunctions;
   algorithm
     S := 0;
     for i in 1:n - 1 loop
-      Cp[i] := Simulator.Files.ThermodynamicFunctions.VapCpId(VapCp, 298.15 + i * (T - 298.15) / n) / (298.15 + i * (T - 298.15) / n);
+      Cp[i] := ChemProc.Files.ThermodynamicFunctions.VapCpId(VapCp, 298.15 + i * (T - 298.15) / n) / (298.15 + i * (T - 298.15) / n);
     end for;
     if T >= Tref then
-      S := (T - 298.15) * (Simulator.Files.ThermodynamicFunctions.VapCpId(VapCp, T) / (2 * T) + sum(Cp[:]) + Simulator.Files.ThermodynamicFunctions.VapCpId(VapCp, 298.15) / (2 * 298.15)) / n;
+      S := (T - 298.15) * (ChemProc.Files.ThermodynamicFunctions.VapCpId(VapCp, T) / (2 * T) + sum(Cp[:]) + ChemProc.Files.ThermodynamicFunctions.VapCpId(VapCp, 298.15) / (2 * 298.15)) / n;
     else
-      S := -(T - 298.15) * (Simulator.Files.ThermodynamicFunctions.VapCpId(VapCp, T) / (2 * T) + sum(Cp[:]) + Simulator.Files.ThermodynamicFunctions.VapCpId(VapCp, 298.15) / (2 * 298.15)) / n;
+      S := -(T - 298.15) * (ChemProc.Files.ThermodynamicFunctions.VapCpId(VapCp, T) / (2 * T) + sum(Cp[:]) + ChemProc.Files.ThermodynamicFunctions.VapCpId(VapCp, 298.15) / (2 * 298.15)) / n;
     end if;
     if xliq > 0 and xvap > 0 then
       Sliq := S - R * log(P / Pref) - R * log(xliq) - HV(HOV, Tc, T) / T;

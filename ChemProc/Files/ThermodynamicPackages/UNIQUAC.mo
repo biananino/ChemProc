@@ -2,10 +2,10 @@ within ChemProc.Files.ThermodynamicPackages;
 
   model UNIQUAC
     //Libraries
-    import Simulator.Files.*;
+    import ChemProc.Files.*;
     //Components parameters
     parameter Integer Nc "Number of components";
-    parameter Simulator.Files.ChemsepDatabase.GeneralProperties C[Nc];
+    parameter ChemProc.Files.ChemsepDatabase.GeneralProperties C[Nc];
     Real x_pc[3, Nc](each unit = "-", each min = 0, each max = 1);
     Real P(unit = "Pa", min = 0) "Pressure";
     Real T(unit = "K") "Temperature";
@@ -90,7 +90,7 @@ within ChemProc.Files.ThermodynamicPackages;
     q = sum(x_pc[2, :] .* Q[:]);
 //Calculation of Energy interaction parameter at the input tempetraure
 //Function :Tow_UNIQUAC is used to instantiated
-    tow = Simulator.Files.ThermodynamicFunctions.TowUNIQUAC(Nc, a, T);
+    tow = ChemProc.Files.ThermodynamicFunctions.TowUNIQUAC(Nc, a, T);
 //Calculation of Combinatorial and Residual Activity coefficient
     for i in 1:Nc loop
       if q > 0 then
@@ -169,8 +169,8 @@ within ChemProc.Files.ThermodynamicPackages;
     Sres_p[:] = zeros(3);
 //Calculation of Saturated vapour pressure and Density at the given input condition
     for i in 1:Nc loop
-      Pvap_c[i] = Simulator.Files.ThermodynamicFunctions.Psat(C[i].VP, T);
-      Density[i] = Simulator.Files.ThermodynamicFunctions.Dens(C[i].LiqDen, C[i].Tc, T, P) * 1E-3;
+      Pvap_c[i] = ChemProc.Files.ThermodynamicFunctions.Psat(C[i].VP, T);
+      Density[i] = ChemProc.Files.ThermodynamicFunctions.Dens(C[i].LiqDen, C[i].Tc, T, P) * 1E-3;
     end for;
 //Calculation of Poynting correction Factor at input conditions,Bubble Point and Dew Point
 //Function :Poynting_CF is called from the Simulator Package

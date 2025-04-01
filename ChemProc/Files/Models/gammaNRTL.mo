@@ -1,16 +1,16 @@
 within ChemProc.Files.Models;
 
 model gammaNRTL
-  //  input Simulator.Files.Chemsep_Database.General_Properties C[Nc];
+  //  input ChemProc.Files.Chemsep_Database.General_Properties C[Nc];
   parameter Integer Nc;
-  parameter Simulator.Files.ChemsepDatabase.GeneralProperties C[Nc];
+  parameter ChemProc.Files.ChemsepDatabase.GeneralProperties C[Nc];
   Real x_c[Nc](each min = 0, each max = 1, each start = 1 / (Nc + 1)), T(min = 0, start = 273.15);
   Real gma_c[Nc](each start = 1);
   Real tau[Nc, Nc], G[Nc, Nc], alpha[Nc, Nc], A[Nc, Nc], BIPS[Nc, Nc, 2];
   Real sum1[Nc](each start = 1), sum2[Nc](each start = 1);
   constant Real R = 1.98721;
 equation
-  BIPS = Simulator.Files.ThermodynamicFunctions.BIPNRTL(Nc, C.CAS);
+  BIPS = ChemProc.Files.ThermodynamicFunctions.BIPNRTL(Nc, C.CAS);
   A = BIPS[:, :, 1];
   alpha = BIPS[:, :, 2];
   tau = A ./ (R * T);
