@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: 'True'
 
       - name: Setup Python 3
         uses: actions/setup-python@v5
@@ -42,3 +44,5 @@ jobs:
           reference-files-dir: 'ReferenceFiles'
           reference-files-extension: 'csv'
           reference-files-delimiter: '.'
+
+          
