@@ -42,4 +42,3 @@ jobs:
           reference-files-dir: 'ReferenceFiles'
           reference-files-extension: 'csv'
           reference-files-delimiter: '.'
-          n-simulation-passing: '40'
