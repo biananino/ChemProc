@@ -35,10 +35,11 @@ jobs:
       - name: openmodelica-library-testing
         uses: OpenModelica/openmodelica-library-testing-action@v0.2.0
         with:
-          library: 'Simulator'
+          library: 'ChemProc'
           library-version: '0.9.0'
-          modelica-file: 'Simulator/package.mo'
+          modelica-file: 'ChemProc/package.mo'
           omc-version: 'stable'
           reference-files-dir: 'ReferenceFiles'
-          reference-files-extension: 'mat'
+          reference-files-extension: 'csv'
           reference-files-delimiter: '.'
+          n-simulation-passing: '40'
