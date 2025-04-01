@@ -11,9 +11,7 @@ package MaterialStream "Examples of Simulating Material Stream using Different M
     parameter data.Water wat;
     extends Streams.MaterialStream(Nc = 3, C = {meth, eth, wat});
     extends Simulator.Files.ThermodynamicPackages.RaoultsLaw(Nc = 3, C = {meth, eth, wat});
-    Real T_1;
   equation
-    T_1 = 10;
     P = 101325;
     T = 351;
     x_pc[1, :] = {0.33, 0.33, 0.34};
