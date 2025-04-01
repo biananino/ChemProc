@@ -1,29 +1,29 @@
 package Methanol_Water_Distillation
 
   model MS "Extension of Material Stream with Raoults's Law"
-    extends Simulator.Streams.MaterialStream;
-    extends Simulator.Files.ThermodynamicPackages.RaoultsLaw;
+    extends ChemProc.Streams.MaterialStream;
+    extends ChemProc.Files.ThermodynamicPackages.RaoultsLaw;
   end MS;
 
 package rigDist
   model Condenser "Extension of Condenser with Raoult's Law"
-    extends Simulator.UnitOperations.DistillationColumn.Cond;
-    extends Simulator.Files.ThermodynamicPackages.RaoultsLaw;
+    extends ChemProc.UnitOperations.DistillationColumn.Cond;
+    extends ChemProc.Files.ThermodynamicPackages.RaoultsLaw;
   end Condenser;
 
   model Tray "Extension of Tray with Raoult's Law"
-    extends Simulator.UnitOperations.DistillationColumn.DistTray;
-    extends Simulator.Files.ThermodynamicPackages.RaoultsLaw;
+    extends ChemProc.UnitOperations.DistillationColumn.DistTray;
+    extends ChemProc.Files.ThermodynamicPackages.RaoultsLaw;
   end Tray;
 
   model Reboiler "Extension of Reboiler with Raoult's Law"
-    extends Simulator.UnitOperations.DistillationColumn.Reb;
-    extends Simulator.Files.ThermodynamicPackages.RaoultsLaw;
+    extends ChemProc.UnitOperations.DistillationColumn.Reb;
+    extends ChemProc.Files.ThermodynamicPackages.RaoultsLaw;
   end Reboiler;
 
   model DistColumn
     
-    extends Simulator.UnitOperations.DistillationColumn.DistCol;
+    extends ChemProc.UnitOperations.DistillationColumn.DistCol;
     Condenser condenser(Nc = Nc, C = C, Ctype = Ctype, Bin = Bin_t[1]);
     Reboiler reboiler(Nc = Nc, C = C, Bin = Bin_t[Nt]);
     Tray tray[Nt - 2](each Nc = Nc, each C = C, Bin = Bin_t[2:Nt - 1]);
@@ -33,16 +33,16 @@ package rigDist
 end rigDist;
 
 model Flowsheet
-    import data = Simulator.Files.ChemsepDatabase;
+    import data = ChemProc.Files.ChemsepDatabase;
     parameter data.Methanol meth;
     parameter data.Water wat;
     parameter Integer Nc = 2;
     parameter data.GeneralProperties C[Nc] = {meth, wat};
-    Simulator.UnitOperations.Heater HEAT1(C = C, Eff = 1, Nc = Nc, Pdel = 0)  annotation(
+    ChemProc.UnitOperations.Heater HEAT1(C = C, Eff = 1, Nc = Nc, Pdel = 0)  annotation(
       Placement(visible = true, transformation(origin = {-66, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Methanol_Water_Distillation.rigDist.DistColumn DC1(C = C, Ctype = "Total", InT_s = {4}, Nc = Nc, Nt = 8)  annotation(
       Placement(visible = true, transformation(origin = {2, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.UnitOperations.Cooler COOL1(C = C, Eff = 1, Nc = Nc, Pdel = 0)  annotation(
+    ChemProc.UnitOperations.Cooler COOL1(C = C, Eff = 1, Nc = Nc, Pdel = 0)  annotation(
       Placement(visible = true, transformation(origin = {62, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Methanol_Water_Distillation.MS S1(C = C, Nc = Nc)  annotation(
       Placement(visible = true, transformation(origin = {-90, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -54,13 +54,13 @@ model Flowsheet
       Placement(visible = true, transformation(origin = {80, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Methanol_Water_Distillation.MS S5(C = C, Nc = Nc)  annotation(
       Placement(visible = true, transformation(origin = {86, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Streams.EnergyStream E1 annotation(
+    ChemProc.Streams.EnergyStream E1 annotation(
       Placement(visible = true, transformation(origin = {-90, -22}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Streams.EnergyStream E2 annotation(
+    ChemProc.Streams.EnergyStream E2 annotation(
       Placement(visible = true, transformation(origin = {50, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Streams.EnergyStream E3 annotation(
+    ChemProc.Streams.EnergyStream E3 annotation(
       Placement(visible = true, transformation(origin = {76, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Simulator.Streams.EnergyStream E4 annotation(
+    ChemProc.Streams.EnergyStream E4 annotation(
       Placement(visible = true, transformation(origin = {82, 8}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
     connect(COOL1.En, E4.In) annotation(
