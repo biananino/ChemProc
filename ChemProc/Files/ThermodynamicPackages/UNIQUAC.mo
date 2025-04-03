@@ -350,8 +350,7 @@ within ChemProc.Files.ThermodynamicPackages;
     </p>https://wikimedia.org/api/rest_v1/media/math/render/svg/21b673ea8edb013fc1675d11b7e40263bef90ffa
     </p>
     </tr>
-    </html>"),
-      experiment(StopTime = 1.0, Interval = 0.001));
+    </html>"));
   end UNIQUAC;
 
   //=======================================================================================================

@@ -143,7 +143,9 @@ package PR
     for i in 1:N loop
       x1[i] = 0.5 + (i - 1) * 0.025;
     end for;
-  end Pxy;
+  annotation(
+      experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.002));
+end Pxy;
 
   model Txy
     extends Modelica.Icons.Example;
@@ -168,5 +170,7 @@ package PR
     for i in 1:N loop
       x[i, 1] = 0.5 + (i - 1) * 0.025;
     end for;
-  end Txy;
+  annotation(
+      experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.002));
+end Txy;
 end PR;

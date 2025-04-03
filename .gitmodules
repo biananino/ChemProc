@@ -1,0 +1,3 @@
+[submodule "ReferenceFiles"]
+	path = ReferenceFiles
+	url = https://github.com/biananino/ChemProc-ref
